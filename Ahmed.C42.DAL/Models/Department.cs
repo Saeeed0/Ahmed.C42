@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Ahmed.C42.DAL.Models
 {
     //Model Represent a Department Table
-    internal class Department
+    public class Department
     {
         public int Id { get; set; }
         [Required/*(ErrorMessage ="Code is Required ya Hamada!!")*/]//ErrorMessage Should inside View Modle

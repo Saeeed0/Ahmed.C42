@@ -1,6 +1,8 @@
+using Ahmed.C42.DAL.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,10 +22,24 @@ namespace Ahmed.C42.PL
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method to add services to the DI container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews();// Register Built-In Services Required by MVC
+            //services.AddTransient<ApplicationDbContext>();
+            //services.AddSingleton<ApplicationDbContext>();
+            services.AddScoped<ApplicationDbContext>();//Allow DI for ApplicationDbContext
+            services.AddScoped<DbContextOptions<ApplicationDbContext>>();
+            //services.AddDbContext<ApplicationDbContext>();//Instead of Using the Two Previous Methods
+            //services.AddDbContext<ApplicationDbContext>(
+            //    options => options.UseSqlServer("Server = .; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;"),
+            //    contextLifetime: ServiceLifetime.Scoped,//defualt
+            //    optionsLifetime: ServiceLifetime.Scoped //defualt
+            //    );
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlServer("Server = .; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;"
+                ));//this place not suitable place any developer can see this critical info
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

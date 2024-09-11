@@ -10,10 +10,18 @@ using System.Threading.Tasks;
 
 namespace Ahmed.C42.DAL.Data
 {
-    internal class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseSqlServer("Server = .; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;");
+        //public ApplicationDbContext():base(new DbContextOptions<ApplicationDbContext>())
+        //{//Every Where any code ask obj form ApplicationDbContext the CLR will Create this obj => this issue may case opening More than One Connection with SQL Server
+
+        //}
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :base(options)//Dependency Injection
+        {//Every Where any code ask obj form ApplicationDbContext the CLR will Create this obj depending on the life time that you select(AddSingleton,AddScoped,AddTransient)
+
+        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //    => optionsBuilder.UseSqlServer("Server = .; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
