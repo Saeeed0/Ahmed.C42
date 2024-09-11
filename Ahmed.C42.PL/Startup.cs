@@ -36,10 +36,12 @@ namespace Ahmed.C42.PL
             //    contextLifetime: ServiceLifetime.Scoped,//defualt
             //    optionsLifetime: ServiceLifetime.Scoped //defualt
             //    );
+            //services.AddDbContext<ApplicationDbContext>(
+            //    options => options.UseSqlServer("Server = .; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;"
+            //    ));//this place not suitable place any developer can see this cretical info
             services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer("Server = .; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;"
-                ));//this place not suitable place any developer can see this critical info
-
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))//should get DefaultConnection from Decrypt(DefaultConnection) method
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
