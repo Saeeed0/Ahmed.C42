@@ -21,7 +21,7 @@ namespace Ahmed.C42.DAL.Data
 
         }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //    => optionsBuilder.UseSqlServer("Server = .; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;");
+        //    => optionsBuilder.UseSqlServer("Server = DESKTOP-9UUCJQP\\SQLEXPRESS; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

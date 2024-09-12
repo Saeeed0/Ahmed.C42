@@ -28,8 +28,8 @@ namespace Ahmed.C42.PL
             services.AddControllersWithViews();// Register Built-In Services Required by MVC
             //services.AddTransient<ApplicationDbContext>();
             //services.AddSingleton<ApplicationDbContext>();
-            services.AddScoped<ApplicationDbContext>();//Allow DI for ApplicationDbContext
-            services.AddScoped<DbContextOptions<ApplicationDbContext>>();
+            //services.AddScoped<ApplicationDbContext>();//Allow DI for ApplicationDbContext
+            //services.AddScoped<DbContextOptions<ApplicationDbContext>>();
             //services.AddDbContext<ApplicationDbContext>();//Instead of Using the Two Previous Methods
             //services.AddDbContext<ApplicationDbContext>(
             //    options => options.UseSqlServer("Server = .; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;"),
@@ -37,7 +37,7 @@ namespace Ahmed.C42.PL
             //    optionsLifetime: ServiceLifetime.Scoped //defualt
             //    );
             //services.AddDbContext<ApplicationDbContext>(
-            //    options => options.UseSqlServer("Server = .; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;"
+            //    options => options.UseSqlServer("Server = DESKTOP-9UUCJQP\\SQLEXPRESS; Database = MVCApplication; Trusted_Connection = True;"
             //    ));//this place not suitable place any developer can see this cretical info
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))//should get DefaultConnection from Decrypt(DefaultConnection) method
