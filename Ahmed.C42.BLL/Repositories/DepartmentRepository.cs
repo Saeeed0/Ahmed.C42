@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Ahmed.C42.BLL.Repositories
 {
-    internal class DepartmentRepository : IDepartmentRepository
+    public class DepartmentRepository : IDepartmentRepository
     {
         readonly ApplicationDbContext _dbContext;//Null
         //public DepartmentRepository()//without using DI
