@@ -29,7 +29,7 @@ namespace Ahmed.C42.PL
         {
             services.AddControllersWithViews();// Register Built-In Services Required by MVC
 
-            #region Without using AddDbContext , Configuration.GetConnectionString
+            #region Without using AddDbContext , Configuration.GetConnectionString , Types of Lifetime of Object
             //services.AddTransient<ApplicationDbContext>();
             //services.AddSingleton<ApplicationDbContext>();
             //services.AddScoped<ApplicationDbContext>();//Allow DI for ApplicationDbContext
