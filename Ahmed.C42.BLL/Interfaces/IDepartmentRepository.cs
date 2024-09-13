@@ -15,7 +15,6 @@ namespace Ahmed.C42.BLL.Interfaces
         int Add(Department entity);
         int Update(Department entity);
         int Delete(Department entity);
-        //Department Update(Department entity);
-        //Department Delete(int id);
+        
     }
 }

@@ -15,6 +15,7 @@ namespace Ahmed.C42.DAL.Models
         public string Code { get; set; }
         //[Required]///We prefer select Required or any DataAnotation inside fluent API
         public string Name { get; set; }
+        [Display(Name = "Date Of Creation")]
         public DateTime DateOfCreation { get; set; }
     }
 }

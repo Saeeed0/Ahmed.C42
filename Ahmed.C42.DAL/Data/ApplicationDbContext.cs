@@ -12,16 +12,17 @@ namespace Ahmed.C42.DAL.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        //public ApplicationDbContext():base(new DbContextOptions<ApplicationDbContext>())
+        //public ApplicationDbContext():base(new DbContextOptions<ApplicationDbContext>())//Without DI
         //{//Every Where any code ask obj form ApplicationDbContext the CLR will Create this obj => this issue may case opening More than One Connection with SQL Server
-
         //}
+        ///
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //    => optionsBuilder.UseSqlServer("Server = DESKTOP-9UUCJQP\\SQLEXPRESS; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;");
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :base(options)//Dependency Injection
         {//Every Where any code ask obj form ApplicationDbContext the CLR will Create this obj depending on the life time that you select(AddSingleton,AddScoped,AddTransient)
 
         }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //    => optionsBuilder.UseSqlServer("Server = DESKTOP-9UUCJQP\\SQLEXPRESS; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;");
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

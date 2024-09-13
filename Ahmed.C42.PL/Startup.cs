@@ -28,6 +28,8 @@ namespace Ahmed.C42.PL
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();// Register Built-In Services Required by MVC
+
+            #region Without using AddDbContext , Configuration.GetConnectionString
             //services.AddTransient<ApplicationDbContext>();
             //services.AddSingleton<ApplicationDbContext>();
             //services.AddScoped<ApplicationDbContext>();//Allow DI for ApplicationDbContext
@@ -40,10 +42,13 @@ namespace Ahmed.C42.PL
             //    );
             //services.AddDbContext<ApplicationDbContext>(
             //    options => options.UseSqlServer("Server = DESKTOP-9UUCJQP\\SQLEXPRESS; Database = MVCApplication; Trusted_Connection = True;"
-            //    ));//this place not suitable place any developer can see this cretical info
+            //    ));//this place not suitable place any developer can see this cretical info 
+            #endregion
+
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))//should get DefaultConnection from Decrypt(DefaultConnection) method
                 );
+
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
         }
 

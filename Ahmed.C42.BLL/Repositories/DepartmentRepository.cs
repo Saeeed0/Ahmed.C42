@@ -40,10 +40,11 @@ namespace Ahmed.C42.BLL.Repositories
         public Department Get(int Id)
         {
             return _dbContext.Find<Department>(Id);//find first in Local if don't exist find in DB
-            //return _dbContext.Departments.Find(Id);//find first in Local if don't exist find in DB
-            //var department = _dbContext.Departments.Local.Where(D => D.Id == Id).FirstOrDefault();
-            //if (department == null) department = _dbContext.Departments.Where(D => D.Id == Id).FirstOrDefault();
-            //return department;
+            
+            ///return _dbContext.Departments.Find(Id);//find first in Local if don't exist find in DB
+            ///var department = _dbContext.Departments.Local.Where(D => D.Id == Id).FirstOrDefault();
+            ///if (department == null) department = _dbContext.Departments.Where(D => D.Id == Id).FirstOrDefault();
+            ///return department;
         }
 
         public IEnumerable<Department> GetAll()
