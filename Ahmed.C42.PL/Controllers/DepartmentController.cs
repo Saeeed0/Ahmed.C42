@@ -1,5 +1,6 @@
 ﻿using Ahmed.C42.BLL.Interfaces;
 using Ahmed.C42.BLL.Repositories;
+using Ahmed.C42.DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ahmed.C42.PL.Controllers
@@ -19,6 +20,21 @@ namespace Ahmed.C42.PL.Controllers
         {
             var departments=_departmentsRepo.GetAll();
             return View(departments);
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Department department)
+        {
+            if (ModelState.IsValid)//Server-Side Validation
+            {
+                var count = _departmentsRepo.Add(department);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(department);
         }
     }
 }
