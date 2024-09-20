@@ -21,12 +21,12 @@ namespace Ahmed.C42.PL.Controllers
             var departments=_departmentsRepo.GetAll();
             return View(departments);
         }
-        [HttpGet]
+        [HttpGet] //Get the Form that you can fill in
         public IActionResult Create()
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost] //Submit the Form
         public IActionResult Create(Department department)
         {
             if (ModelState.IsValid)//Server-Side Validation

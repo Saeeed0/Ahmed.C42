@@ -48,7 +48,8 @@ namespace Ahmed.C42.BLL.Repositories
         }
 
         public IEnumerable<Department> GetAll()
-            => _dbContext.Departments.AsNoTracking().ToList();
+            => _dbContext.Departments.AsNoTracking().ToList();//AsNoTracking(): Use this when you’re just reading data and don’t plan to modify or save it, making your queries faster.
+
 
 
 
