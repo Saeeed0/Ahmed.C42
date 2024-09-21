@@ -46,6 +46,19 @@ namespace Ahmed.C42.PL
             //services.AddDbContext<ApplicationDbContext>(
             //    options => options.UseSqlServer("Server = DESKTOP-9UUCJQP\\SQLEXPRESS; Database = MVCApplication; Trusted_Connection = True;"
             //    ));//this place not suitable place any developer can see this cretical info 
+
+            services.AddScoped<ApplicationDbContext>();
+            services.AddScoped<DbContextOptions<ApplicationDbContext>>(serviceProvider =>
+            {
+                var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+                optionBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                ///////Suppose you need a specific service => You can use serviceProvider and call this service from it
+                ///////for example
+                ////using var serviceScope = serviceProvider.CreateScope();
+                ////var departmentRepo = serviceScope.ServiceProvider.GetService<IDepartmentRepository>();//ask class implementing this interface
+                return optionBuilder.Options;
+            });
+
             #endregion
 
             services.AddDbContext<ApplicationDbContext>(

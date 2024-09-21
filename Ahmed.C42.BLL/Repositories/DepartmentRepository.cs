@@ -21,6 +21,24 @@ namespace Ahmed.C42.BLL.Repositories
         {
             _dbContext = applicationDbContext;
         }
+        //public IEnumerable<Department> GetAll()
+        //    => _dbContext.Departments.AsNoTracking().ToList();//AsNoTracking(): Use this when you’re just reading data and don’t plan to modify or save it, making your queries faster.
+
+        public IEnumerable<Department> GetAll(bool withAsNoTracking = true)
+        {
+            if (withAsNoTracking)
+                return _dbContext.Departments.AsNoTracking().ToList();
+            return _dbContext.Departments.ToList();
+        }
+        public Department GetById(int Id)
+        {
+            return _dbContext.Find<Department>(Id);
+            ///find first in Local if don't exist find in DB , search using only the primary key of the entity
+            ///return _dbContext.Departments.Find(Id);//find first in Local if don't exist find in DB
+            ///var department = _dbContext.Departments.Local.FirstOrDefault(D => D.Id == Id);
+            ///if (department == null) department = _dbContext.Departments.FirstOrDefault(D => D.Id == Id);
+            ///return department;
+        }
         public int Add(Department entity)
         {
             _dbContext.Departments.Add(entity);
@@ -37,21 +55,8 @@ namespace Ahmed.C42.BLL.Repositories
             return _dbContext.SaveChanges();
         }
 
-        public Department Get(int Id)
-        {
-            return _dbContext.Find<Department>(Id);//find first in Local if don't exist find in DB
-            
-            ///return _dbContext.Departments.Find(Id);//find first in Local if don't exist find in DB
-            ///var department = _dbContext.Departments.Local.Where(D => D.Id == Id).FirstOrDefault();
-            ///if (department == null) department = _dbContext.Departments.Where(D => D.Id == Id).FirstOrDefault();
-            ///return department;
-        }
+        
 
-        public IEnumerable<Department> GetAll()
-            => _dbContext.Departments.AsNoTracking().ToList();//AsNoTracking(): Use this when you’re just reading data and don’t plan to modify or save it, making your queries faster.
-
-
-
-
+        
     }
 }

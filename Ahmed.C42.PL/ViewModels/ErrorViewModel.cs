@@ -1,6 +1,6 @@
 using System;
 
-namespace Ahmed.C42.PL.Models
+namespace Ahmed.C42.PL.ViewModels
 {
     public class ErrorViewModel
     {

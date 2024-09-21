@@ -10,8 +10,8 @@ namespace Ahmed.C42.BLL.Interfaces
     public interface IDepartmentRepository
     {
         //List<Department> GetAll();
-        IEnumerable<Department> GetAll();
-        Department Get(int Id);
+        IEnumerable<Department> GetAll(bool withAsNoTracking = true);
+        Department GetById(int Id);
         int Add(Department entity);
         int Update(Department entity);
         int Delete(Department entity);
