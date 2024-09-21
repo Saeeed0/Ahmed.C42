@@ -1,6 +1,6 @@
 ﻿using Ahmed.C42.BLL.Interfaces;
-using Ahmed.C42.DAL.Data;
-using Ahmed.C42.DAL.Models;
+using Ahmed.C42.DAL.Models.Department;
+using Ahmed.C42.DAL.Presistence.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

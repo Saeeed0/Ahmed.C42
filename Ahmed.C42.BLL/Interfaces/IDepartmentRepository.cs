@@ -1,4 +1,4 @@
-﻿using Ahmed.C42.DAL.Models;
+﻿using Ahmed.C42.DAL.Models.Department;
 using System;
 using System.Collections.Generic;
 using System.Linq;

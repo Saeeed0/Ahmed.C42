@@ -1,6 +1,6 @@
 ﻿using Ahmed.C42.BLL.Interfaces;
 using Ahmed.C42.BLL.Repositories;
-using Ahmed.C42.DAL.Models;
+using Ahmed.C42.DAL.Models.Department;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ahmed.C42.PL.Controllers

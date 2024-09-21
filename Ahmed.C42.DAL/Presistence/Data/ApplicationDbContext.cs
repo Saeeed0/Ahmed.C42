@@ -1,5 +1,4 @@
-﻿using Ahmed.C42.DAL.Data.Configurations;
-using Ahmed.C42.DAL.Models;
+﻿using Ahmed.C42.DAL.Presistence.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,8 +6,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Ahmed.C42.DAL.Models.Department;
 
-namespace Ahmed.C42.DAL.Data
+namespace Ahmed.C42.DAL.Presistence.Data
 {
     public class ApplicationDbContext : DbContext
     {
@@ -18,7 +18,7 @@ namespace Ahmed.C42.DAL.Data
         ///
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //    => optionsBuilder.UseSqlServer("Server = DESKTOP-9UUCJQP\\SQLEXPRESS; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;");
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :base(options)//Dependency Injection
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)//Dependency Injection
         {//Every Where any code ask obj form ApplicationDbContext the CLR will Create this obj depending on the life time that you select(AddSingleton,AddScoped,AddTransient)
 
         }

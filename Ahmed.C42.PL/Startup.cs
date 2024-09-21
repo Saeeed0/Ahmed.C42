@@ -1,6 +1,6 @@
 using Ahmed.C42.BLL.Interfaces;
 using Ahmed.C42.BLL.Repositories;
-using Ahmed.C42.DAL.Data;
+using Ahmed.C42.DAL.Presistence.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,14 +32,17 @@ namespace Ahmed.C42.PL
             #region Without using AddDbContext , Configuration.GetConnectionString , Types of Lifetime of Object
             //services.AddTransient<ApplicationDbContext>();
             //services.AddSingleton<ApplicationDbContext>();
+
             //services.AddScoped<ApplicationDbContext>();//Allow DI for ApplicationDbContext
             //services.AddScoped<DbContextOptions<ApplicationDbContext>>();
+
             //services.AddDbContext<ApplicationDbContext>();//Instead of Using the Two Previous Methods
             //services.AddDbContext<ApplicationDbContext>(
             //    options => options.UseSqlServer("Server = .; Database = MVCApplication; Trusted_Connection = True; MultipleActiveResultsSets = false;"),
             //    contextLifetime: ServiceLifetime.Scoped,//defualt
             //    optionsLifetime: ServiceLifetime.Scoped //defualt
             //    );
+
             //services.AddDbContext<ApplicationDbContext>(
             //    options => options.UseSqlServer("Server = DESKTOP-9UUCJQP\\SQLEXPRESS; Database = MVCApplication; Trusted_Connection = True;"
             //    ));//this place not suitable place any developer can see this cretical info 
