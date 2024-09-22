@@ -1,5 +1,4 @@
-﻿using Ahmed.C42.BLL.Interfaces;
-using Ahmed.C42.DAL.Models.Department;
+﻿using Ahmed.C42.DAL.Entities.Department;
 using Ahmed.C42.DAL.Presistence.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ahmed.C42.BLL.Repositories
+namespace Ahmed.C42.DAL.Presistence.Repositories.Departments
 {
     public class DepartmentRepository : IDepartmentRepository
     {
@@ -24,13 +23,7 @@ namespace Ahmed.C42.BLL.Repositories
         //public IEnumerable<Department> GetAll()
         //    => _dbContext.Departments.AsNoTracking().ToList();//AsNoTracking(): Use this when you’re just reading data and don’t plan to modify or save it, making your queries faster.
 
-        public IEnumerable<Department> GetAll(bool withAsNoTracking = true)
-        {
-            if (withAsNoTracking)
-                return _dbContext.Departments.AsNoTracking().ToList();
-            return _dbContext.Departments.ToList();
-        }
-        public Department GetById(int Id)
+        public Department Get(int Id)
         {
             return _dbContext.Find<Department>(Id);
             ///find first in Local if don't exist find in DB , search using only the primary key of the entity
@@ -39,6 +32,19 @@ namespace Ahmed.C42.BLL.Repositories
             ///if (department == null) department = _dbContext.Departments.FirstOrDefault(D => D.Id == Id);
             ///return department;
         }
+
+        public IEnumerable<Department> GetAll(bool withAsNoTracking = true)
+        {
+            if (withAsNoTracking)
+                return _dbContext.Departments.AsNoTracking().ToList();
+            return _dbContext.Departments.ToList();
+        }
+
+        public IQueryable<Department> GetAllAsIQueryable()//work with immidiate operator
+        {
+            return _dbContext.Departments;//Departments is a DbSet and the DbSet implements the IQueryable
+        }
+
         public int Add(Department entity)
         {
             _dbContext.Departments.Add(entity);
@@ -54,8 +60,6 @@ namespace Ahmed.C42.BLL.Repositories
             _dbContext.Departments.Remove(entity);
             return _dbContext.SaveChanges();
         }
-
-        
 
         
     }

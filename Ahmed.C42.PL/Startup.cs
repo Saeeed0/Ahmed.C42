@@ -1,6 +1,6 @@
-using Ahmed.C42.BLL.Interfaces;
-using Ahmed.C42.BLL.Repositories;
+using Ahmed.C42.BLL.Services.Departments;
 using Ahmed.C42.DAL.Presistence.Data;
+using Ahmed.C42.DAL.Presistence.Repositories.Departments;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -47,17 +47,17 @@ namespace Ahmed.C42.PL
             //    options => options.UseSqlServer("Server = DESKTOP-9UUCJQP\\SQLEXPRESS; Database = MVCApplication; Trusted_Connection = True;"
             //    ));//this place not suitable place any developer can see this cretical info 
 
-            services.AddScoped<ApplicationDbContext>();
-            services.AddScoped<DbContextOptions<ApplicationDbContext>>(serviceProvider =>
-            {
-                var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-                optionBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                ///////Suppose you need a specific service => You can use serviceProvider and call this service from it
-                ///////for example
-                ////using var serviceScope = serviceProvider.CreateScope();
-                ////var departmentRepo = serviceScope.ServiceProvider.GetService<IDepartmentRepository>();//ask class implementing this interface
-                return optionBuilder.Options;
-            });
+            //services.AddScoped<ApplicationDbContext>();
+            //services.AddScoped<DbContextOptions<ApplicationDbContext>>(serviceProvider =>
+            //{
+            //    var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            //    optionBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            //    ///////Suppose you need a specific service => You can use serviceProvider and call this service from it
+            //    ///////for example
+            //    ////using var serviceScope = serviceProvider.CreateScope();
+            //    ////var departmentRepo = serviceScope.ServiceProvider.GetService<IDepartmentRepository>();//ask class implementing this interface
+            //    return optionBuilder.Options;
+            //});
 
             #endregion
 
@@ -66,6 +66,8 @@ namespace Ahmed.C42.PL
                 );
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+            services.AddScoped<IDepartmentService, DepartmentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

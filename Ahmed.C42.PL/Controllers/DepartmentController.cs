@@ -1,6 +1,5 @@
-﻿using Ahmed.C42.BLL.Interfaces;
-using Ahmed.C42.BLL.Repositories;
-using Ahmed.C42.DAL.Models.Department;
+﻿using Ahmed.C42.DAL.Entities.Department;
+using Ahmed.C42.DAL.Presistence.Repositories.Departments;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ahmed.C42.PL.Controllers

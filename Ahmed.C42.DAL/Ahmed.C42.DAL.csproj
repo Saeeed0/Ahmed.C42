@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Presistence\Data\Data Seeds\" />
-    <Folder Include="Presistence\Repositories\" />
   </ItemGroup>
 
 </Project>

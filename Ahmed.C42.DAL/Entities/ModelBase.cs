@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ahmed.C42.DAL.Models
+namespace Ahmed.C42.DAL.Entities
 {
     public class ModelBase
     {

@@ -19,7 +19,7 @@ namespace Ahmed.C42.DAL.Presistence.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Ahmed.C42.DAL.Models.Department.Department", b =>
+            modelBuilder.Entity("Ahmed.C42.DAL.Entities.Department.Department", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

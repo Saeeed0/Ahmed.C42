@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ahmed.C42.DAL.Models.Department //foreach Module (Models.Department) usualy has more than model (Department)
+namespace Ahmed.C42.DAL.Entities.Department //foreach Module (Models.Department) usualy has more than model (Department)
 {
     //Model Represent a Department Table
     public class Department : ModelBase

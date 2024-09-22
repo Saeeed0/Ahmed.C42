@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Ahmed.C42.DAL.Models.Department;
+using Ahmed.C42.DAL.Entities.Department;
 
 namespace Ahmed.C42.DAL.Presistence.Data
 {
