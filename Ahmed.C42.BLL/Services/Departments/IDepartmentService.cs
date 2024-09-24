@@ -9,8 +9,8 @@ namespace Ahmed.C42.BLL.Services.Departments
 {
     public interface IDepartmentService
     {
-        IEnumerable<DepartmentToReturnDto> GetAllDepartmnets();
-        DepartmentDetailsToReturnDto GetDepartmentById(int id);
+        IEnumerable<DepartmentDto> GetAllDepartmnets();
+        DepartmentDetailsDto GetDepartmentById(int id);
         int CreateDepartment(CreatedDepartmentDto department);
         int UpdateDepartment(UpdatedDepartmentDto department);
 

@@ -18,7 +18,7 @@ namespace Ahmed.C42.BLL.Services.Departments
         {
             _departmentRepository = departmentRepository;
         }
-        public IEnumerable<DepartmentToReturnDto> GetAllDepartmnets()
+        public IEnumerable<DepartmentDto> GetAllDepartmnets()
         {
             #region this issue will get all Department data and you Don't need all this
             //var departments = _departmentRepository.GetAll();
@@ -45,22 +45,21 @@ namespace Ahmed.C42.BLL.Services.Departments
             #endregion
 
             var departments = _departmentRepository.GetAllAsIQueryable()
-                                                   .Select(Department => new DepartmentToReturnDto
+                                                   .Select(Department => new DepartmentDto
                                                    {
                                                        Id = Department.Id,
                                                        Code = Department.Code,
                                                        Name = Department.Name,
-                                                       Description = Department.Description,
                                                        CreationDateTime = Department.CreationDateTime,
                                                    }).AsNoTracking().ToList();//you can use Specification DP
             return departments;
         }
 
-        public DepartmentDetailsToReturnDto GetDepartmentById(int id)
+        public DepartmentDetailsDto GetDepartmentById(int id)
         {
             var department = _departmentRepository.Get(id);
             if(department is not null /*is { }//.net8*/)
-                return new DepartmentDetailsToReturnDto()
+                return new DepartmentDetailsDto()
                 {
                     Id = department.Id,
                     Code = department.Code,

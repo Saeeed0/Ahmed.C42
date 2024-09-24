@@ -1,9 +1,10 @@
 ﻿@model DepartmentDetailsDto
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Delete";
 }
 
-<h1>Details</h1>
+<h1>Delete</h1>
+
 
 <!-- Navigation bar -->
 <ul class="nav nav-tabs">
@@ -80,8 +81,10 @@
 </div>
 
 <!-- Actions -->
-<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a> | 
-<a asp-action="Index" class="btn btn-light">Back To List</a>
+<form asp-action="Delete">
+    <input type="submit" asp-route-id="@Model.Id" class="btn btn-danger">Delete</input> |
+    <a asp-action="Index" class="btn btn-light">Cansle</a>
+</form>
 
 <!-- JavaScript to handle toggling between sections -->
 <script>
@@ -89,7 +92,7 @@
         // Hide both sections first
         document.getElementById('general').style.display = 'none';
         document.getElementById('administration').style.display = 'none';
-        
+
         // Remove active class from both tabs
         document.getElementById('general-tab').classList.remove('active');
         document.getElementById('admin-tab').classList.remove('active');
@@ -105,7 +108,8 @@
     }
 
     // Default to showing the General section on page load
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         showSection('general');
     });
 </script>
+

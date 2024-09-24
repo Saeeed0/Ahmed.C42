@@ -16,7 +16,6 @@ namespace Ahmed.C42.DAL.Entities.Department //foreach Module (Models.Department)
         //[Required]///We prefer select Required or any DataAnotation inside fluent API
         public string? Description { get; set; } 
 
-        [Display(Name = "Date Of Creation")]
         public DateTime CreationDateTime { get; set; } //(ex: the Date that the Department Salse Created in the Company)
     }
 }

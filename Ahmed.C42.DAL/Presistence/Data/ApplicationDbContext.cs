@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Ahmed.C42.DAL.Entities.Department;
+using Ahmed.C42.DAL.Entities.Employee;
 
 namespace Ahmed.C42.DAL.Presistence.Data
 {
@@ -30,5 +31,6 @@ namespace Ahmed.C42.DAL.Presistence.Data
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());//ModelBuilder allows you to use the Fluent API to configure entity relationships, keys, constraints, and other database-specific configurations and how your models are mapped compared to data annotations.
         }
         public DbSet<Department> Departments { get; set; }//The DbSet<TEntity> maps an entity class (TEntity) to a corresponding database table
+        public DbSet<Employee> Employees { get; set; }
     }
 }
