@@ -68,7 +68,7 @@ namespace Ahmed.C42.DAL.Presistence.Data.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("Ahmed.C42.DAL.Entities.Employee.Employee", b =>
+            modelBuilder.Entity("Ahmed.C42.DAL.Entities.Department.Department", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
