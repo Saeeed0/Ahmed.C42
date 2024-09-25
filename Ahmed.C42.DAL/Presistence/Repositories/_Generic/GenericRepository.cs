@@ -33,8 +33,13 @@ namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
         public IEnumerable<T> GetAll(bool withAsNoTracking = true)
         {
             if (withAsNoTracking)
-                return _dbContext.Set<T>().AsNoTracking().ToList();
-            return _dbContext.Set<T>().ToList();
+                return _dbContext.Set<T>().Where(X => !X.IsDeleted).AsNoTracking().ToList(); ;
+            return _dbContext.Set<T>().Where(X => !X.IsDeleted).ToList();
+
+            //if (withAsNoTracking)
+            //    return _dbContext.Set<T>().AsNoTracking().ToList();
+            //return _dbContext.Set<T>().ToList();
+
         }
 
         public IQueryable<T> GetAllAsIQueryable()//work with immidiate operator
@@ -54,7 +59,9 @@ namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
         }
         public int Delete(T entity)
         {
-            _dbContext.Set<T>().Remove(entity);
+            //_dbContext.Set<T>().Remove(entity);//Hard Delete
+            entity.IsDeleted = true;//Soft Delete
+            _dbContext.Set<T>().Update(entity);
             return _dbContext.SaveChanges();
         }
     }

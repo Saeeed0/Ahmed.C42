@@ -13,9 +13,9 @@ namespace Ahmed.C42.DAL.Entities.Employee
     {
         public string Name { get; set; } = null!;
 
-        public int Age { get; set; }
+        public int? Age { get; set; }
 
-        public string Address { get; set; }
+        public string? Address { get; set; }
 
         public decimal Salary { get; set; }
 
