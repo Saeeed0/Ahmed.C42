@@ -11,6 +11,14 @@ namespace Ahmed.C42.BLL.CustomModel.Employees
     public class EmployeeDetailsDto
     {
         public int Id { get; set; }
+
+        #region Administration Section
+        public int CreatedBy { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public int LastModifiedBy { get; set; }
+        public DateTime LastModifiedOn { get; set; } 
+        #endregion
+
         public string Name { get; set; } = null!;
 
         public int? Age { get; set; }
@@ -34,8 +42,8 @@ namespace Ahmed.C42.BLL.CustomModel.Employees
         //[DataType(DataType.DateTime)]
         public DateTime HirringDate { get; set; }
 
-        public string Gender { get; set; } = null!;
+        public Gender Gender { get; set; } 
 
-        public string EmployeeType { get; set; } = null!;
+        public EmployeeType EmployeeType { get; set; } 
     }
 }

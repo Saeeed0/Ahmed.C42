@@ -44,21 +44,23 @@ namespace Ahmed.C42.BLL.Services.Departments
             //// you can install AutoMapper.dll for automatic mapping 
             #endregion
 
-            var departments = _departmentRepository.GetAllAsIQueryable()
-                                                   .Select(Department => new DepartmentDto
-                                                   {
-                                                       Id = Department.Id,
-                                                       Code = Department.Code,
-                                                       Name = Department.Name,
-                                                       CreationDateTime = Department.CreationDateTime,
-                                                   }).AsNoTracking().ToList();//you can use Specification DP
+            var departments = _departmentRepository
+                                    .GetAllAsIQueryable()
+                                    .Select(Department => new DepartmentDto
+                                    {
+                                        Id = Department.Id,
+                                        Code = Department.Code,
+                                        Name = Department.Name,
+                                        CreationDateTime = Department.CreationDateTime,
+                                    }).AsNoTracking().ToList();//you can use Specification DP
+
             return departments;
         }
 
         public DepartmentDetailsDto GetDepartmentById(int id)
         {
             var department = _departmentRepository.Get(id);
-            if(department is not null /*is { }//.net8*/)
+            if (department is not null /*is { }//.net8*/)
                 return new DepartmentDetailsDto()
                 {
                     Id = department.Id,
@@ -110,10 +112,10 @@ namespace Ahmed.C42.BLL.Services.Departments
             var department = _departmentRepository.Get(id);
             if (department is not null)
                 return _departmentRepository.Delete(department) > 0;
-            else 
+            else
                 return false;
         }
 
-        
+
     }
 }

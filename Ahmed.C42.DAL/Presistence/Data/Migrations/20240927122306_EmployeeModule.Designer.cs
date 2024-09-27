@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ahmed.C42.DAL.Presistence.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240924121328_EmployeeModuleMigration")]
-    partial class EmployeeModuleMigration
+    [Migration("20240927122306_EmployeeModule")]
+    partial class EmployeeModule
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,7 +70,7 @@ namespace Ahmed.C42.DAL.Presistence.Data.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("Ahmed.C42.DAL.Entities.Department.Department", b =>
+            modelBuilder.Entity("Ahmed.C42.DAL.Entities.Employee.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,7 +80,7 @@ namespace Ahmed.C42.DAL.Presistence.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int>("Age")
+                    b.Property<int?>("Age")
                         .HasColumnType("int");
 
                     b.Property<int>("CreatedBy")
@@ -115,7 +115,9 @@ namespace Ahmed.C42.DAL.Presistence.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("LastModifiedOn")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("datetime2")
+                        .HasComputedColumnSql("GETDATE()");
 
                     b.Property<string>("Name")
                         .IsRequired()

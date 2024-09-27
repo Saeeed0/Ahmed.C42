@@ -1,6 +1,8 @@
 using Ahmed.C42.BLL.Services.Departments;
+using Ahmed.C42.BLL.Services.Employees;
 using Ahmed.C42.DAL.Presistence.Data;
 using Ahmed.C42.DAL.Presistence.Repositories.Departments;
+using Ahmed.C42.DAL.Presistence.Repositories.Employees;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -66,8 +68,10 @@ namespace Ahmed.C42.PL
                 );
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IEmployeeService,EmployeeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

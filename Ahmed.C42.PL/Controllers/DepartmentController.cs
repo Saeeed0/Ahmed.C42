@@ -73,12 +73,18 @@ namespace Ahmed.C42.PL.Controllers
             _environment = environment;
         }
 
+        #region Index
+
         [HttpGet]
         public IActionResult Index()
         {
             var department = _departmentService.GetAllDepartmnets();
             return View(department);
         }
+
+        #endregion
+
+        #region Details
 
         [HttpGet]
         public IActionResult Details(int? id)
@@ -93,6 +99,10 @@ namespace Ahmed.C42.PL.Controllers
             return View(department);
         }
 
+        #endregion
+
+        #region Create
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -100,15 +110,15 @@ namespace Ahmed.C42.PL.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreatedDepartmentDto department)
+        public IActionResult Create(CreatedDepartmentDto departmentDto)
         {
             if (!ModelState.IsValid)
-                return View(department);
+                return View(departmentDto);
 
             string message = string.Empty;
             try
             {
-                var result = _departmentService.CreateDepartment(department);
+                var result = _departmentService.CreateDepartment(departmentDto);
 
                 if (result > 0)
                     return RedirectToAction(nameof(Index));
@@ -116,7 +126,7 @@ namespace Ahmed.C42.PL.Controllers
                 {
                     message = "Department is not Created";
                     ModelState.AddModelError(string.Empty, message);
-                    return View(department);
+                    return View(departmentDto);
                 }
             }
             catch (Exception ex)
@@ -130,14 +140,19 @@ namespace Ahmed.C42.PL.Controllers
             }
 
             ModelState.AddModelError(string.Empty, message);
-            return View(department);
+            return View(departmentDto);
         }
-                
+
+        #endregion
+
+        #region Edit
+
         [HttpGet]
         public IActionResult Edit(int? id)
         {
             if (!id.HasValue)
                 return BadRequest();
+
             var department = _departmentService.GetDepartmentById(id.Value);
 
             if (department is null)
@@ -153,11 +168,11 @@ namespace Ahmed.C42.PL.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit([FromRoute] int id,DepartmentEditViewModel departmentEditVM)
+        public IActionResult Edit([FromRoute] int id, DepartmentEditViewModel departmentEditVM)
         {
             if (!ModelState.IsValid)
                 return View(departmentEditVM);
-            
+
             var message = string.Empty;
 
             try
@@ -186,13 +201,17 @@ namespace Ahmed.C42.PL.Controllers
                 _logger.LogError(ex, ex.Message);//the Logging will be in Console(kestrel)
 
                 //Set Message
-                message = _environment.IsDevelopment()? ex.Message : "an error occured during updating the department :(";
-                
+                message = _environment.IsDevelopment() ? ex.Message : "an error occured during updating the department :(";
+
             }
 
             ModelState.AddModelError(string.Empty, message);
             return View(departmentEditVM);
         }
+
+        #endregion
+
+        #region Delete
 
         //[HttpGet]
         //public IActionResult Delete(int? id)
@@ -220,7 +239,7 @@ namespace Ahmed.C42.PL.Controllers
                 if (deleted)
                     return RedirectToAction(nameof(Index));
 
-                message = "an error occured during updating the department :(";
+                message = "an error occured during Deleting the department :(";
 
             }
             catch (Exception ex)
@@ -229,13 +248,14 @@ namespace Ahmed.C42.PL.Controllers
                 _logger.LogError(ex, ex.Message);//the Logging will be in Console(kestrel)
 
                 //Set Message
-                message = _environment.IsDevelopment() ? ex.Message : "an error occured during updating the department :(";
+                message = _environment.IsDevelopment() ? ex.Message : "an error occured during Deleting the department :(";
             }
 
             //ModelState.AddModelError(string.Empty, message);
             return RedirectToAction(nameof(Index));
         }
 
+        #endregion
     }
     //scaffolding process => 1.install package 2. update dependance information 3. build the project 4. generate the view
 }

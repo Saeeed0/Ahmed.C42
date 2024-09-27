@@ -36,6 +36,7 @@ namespace Ahmed.C42.DAL.Presistence.Data.Configurations.Employees
                 );
 
             builder.Property(E => E.CreatedOn).HasDefaultValueSql("GETUTCDATE()");//when create record will get its value
+            builder.Property(E => E.LastModifiedOn).HasComputedColumnSql("GETDATE()");//when you change in record will compute the value(ex:Net Salary)
 
         }
     }

@@ -18,7 +18,7 @@ namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
         }
 
         //public IEnumerable<T> GetAll()
-        //    => _dbContext.Ts.AsNoTracking().ToList();//AsNoTracking(): Use this when you’re just reading data and don’t plan to modify or save it, making your queries faster.
+        //    => _dbContext.Set<T>().AsNoTracking().ToList();//AsNoTracking(): Use this when you’re just reading data and don’t plan to modify or save it, making your queries faster.
 
         public T Get(int Id)
         {
@@ -33,7 +33,7 @@ namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
         public IEnumerable<T> GetAll(bool withAsNoTracking = true)
         {
             if (withAsNoTracking)
-                return _dbContext.Set<T>().Where(X => !X.IsDeleted).AsNoTracking().ToList(); ;
+                return _dbContext.Set<T>().Where(X => !X.IsDeleted).AsNoTracking().ToList(); 
             return _dbContext.Set<T>().Where(X => !X.IsDeleted).ToList();
 
             //if (withAsNoTracking)
@@ -44,7 +44,8 @@ namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
 
         public IQueryable<T> GetAllAsIQueryable()//work with immidiate operator
         {
-            return _dbContext.Set<T>();//Ts is a DbSet and the DbSet implements the IQueryable
+            return _dbContext.Set<T>().Where(X => !X.IsDeleted).AsNoTracking();//Set<T>() is a DbSet and the DbSet implements the IQueryable
+
         }
 
         public int Add(T entity)

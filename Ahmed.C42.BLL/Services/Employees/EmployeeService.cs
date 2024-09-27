@@ -35,6 +35,7 @@ namespace Ahmed.C42.BLL.Services.Employees
                     //EmployeeType = employee.EmployeeType.ToString()
 
                 });
+            
         }
 
         public EmployeeDetailsDto GetEmployeeById(int id)
@@ -53,8 +54,8 @@ namespace Ahmed.C42.BLL.Services.Employees
                     Email = employee.Email,
                     PhoneNumber = employee.PhoneNumber,
                     HirringDate = employee.HirringDate,
-                    Gender = nameof(employee.Gender),
-                    EmployeeType = nameof(employee.EmployeeType),
+                    Gender = employee.Gender,
+                    EmployeeType = employee.EmployeeType,
 
                 };
             return null;
@@ -74,6 +75,7 @@ namespace Ahmed.C42.BLL.Services.Employees
                 HirringDate = employeeDto.HirringDate,
                 Gender = employeeDto.Gender,
                 EmployeeType = employeeDto.EmployeeType,
+                //CreatedOn = DateTime.UtcNow,//.HasDefaultValueSql("GETDATE()") in employeeconfiguration
                 CreatedBy = 1,
                 LastModifiedBy = 1,
                 LastModifiedOn = DateTime.UtcNow
@@ -97,7 +99,6 @@ namespace Ahmed.C42.BLL.Services.Employees
                 HirringDate = employeeDto.HirringDate,
                 Gender = employeeDto.Gender,
                 EmployeeType = employeeDto.EmployeeType,
-                CreatedBy = 1,
                 LastModifiedBy = 1,
                 LastModifiedOn = DateTime.UtcNow
 
