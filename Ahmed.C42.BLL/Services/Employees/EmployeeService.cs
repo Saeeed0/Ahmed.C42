@@ -29,8 +29,8 @@ namespace Ahmed.C42.BLL.Services.Employees
                     IsActive = employee.IsActive,
                     Salary = employee.Salary,
                     Email = employee.Email,
-                    Gender = nameof(employee.Gender),
-                    EmployeeType = nameof(employee.EmployeeType)//nameof() faster than ToString()
+                    Gender = employee.Gender,
+                    EmployeeType = employee.EmployeeType//nameof() faster than ToString()
                     //Gender = employee.Gender.ToString(),
                     //EmployeeType = employee.EmployeeType.ToString()
 

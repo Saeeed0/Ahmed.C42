@@ -10,7 +10,7 @@ namespace Ahmed.C42.BLL.CustomModel.Employees
 {
     public class CreatedEmployeeDto
     {
-        //    [Required]
+        [Required]
         [MaxLength(50, ErrorMessage = "Max Length of Name is 50 Chars")]
         [MinLength(5, ErrorMessage = "Min Length of Name is 5 Chars")]
         public string Name { get; set; } = null!;

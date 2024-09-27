@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\..\Presistence\Data\Migrations\20240924115609_EmployeeMigration.cs" Link="20240924115609_EmployeeMigration.cs" />
-    <Compile Include="..\..\..\..\..\..\Presistence\Data\Migrations\20240924115609_EmployeeMigration.Designer.cs" Link="20240924115609_EmployeeMigration.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.17" />
   </ItemGroup>
 

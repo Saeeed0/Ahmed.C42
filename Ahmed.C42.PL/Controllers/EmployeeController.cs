@@ -189,6 +189,7 @@ namespace Ahmed.C42.PL.Controllers
 
         //    return View(employee);
         //}
+
         [HttpPost]
         public IActionResult Delete(int id)
         {
