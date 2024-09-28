@@ -1,4 +1,5 @@
 ﻿using Ahmed.C42.DAL.Entities;
+using Ahmed.C42.DAL.Entities.Employee;
 using Ahmed.C42.DAL.Presistence.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -44,8 +45,13 @@ namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
 
         public IQueryable<T> GetAllAsIQueryable()//work with immidiate operator
         {
-            return _dbContext.Set<T>().Where(X => !X.IsDeleted).AsNoTracking();//Set<T>() is a DbSet and the DbSet implements the IQueryable
+            return _dbContext.Set<T>().AsNoTracking();//Set<T>() is a DbSet and the DbSet implements the IQueryable
 
+        }
+
+        public IEnumerable<T> GetAllAsIEnumerable()
+        {
+            return _dbContext.Set<T>().AsNoTracking();
         }
 
         public int Add(T entity)

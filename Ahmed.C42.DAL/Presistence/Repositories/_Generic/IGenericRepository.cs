@@ -15,6 +15,7 @@ namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
         IEnumerable<T> GetAll(bool withAsNoTracking = true);
 
         IQueryable<T> GetAllAsIQueryable();
+        IEnumerable<T> GetAllAsIEnumerable();
 
         int Add(T entity);
 

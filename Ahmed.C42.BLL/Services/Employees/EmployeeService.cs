@@ -21,6 +21,7 @@ namespace Ahmed.C42.BLL.Services.Employees
         public IEnumerable<EmployeeDto> GetAllEmployees()
         {
             return _employeeRepository.GetAllAsIQueryable()
+                .Where(E=>E.IsDeleted)
                 .Select(employee => new EmployeeDto
                 {
                     Id = employee.Id,
@@ -30,11 +31,11 @@ namespace Ahmed.C42.BLL.Services.Employees
                     Salary = employee.Salary,
                     Email = employee.Email,
                     Gender = employee.Gender,
-                    EmployeeType = employee.EmployeeType//nameof() faster than ToString()
+                    EmployeeType = employee.EmployeeType
                     //Gender = employee.Gender.ToString(),
                     //EmployeeType = employee.EmployeeType.ToString()
 
-                });
+                }).ToList();
             
         }
 

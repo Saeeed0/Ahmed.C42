@@ -23,5 +23,6 @@ namespace Ahmed.C42.DAL.Presistence.Repositories.Employees
             //_dbContext = applicationDbContext; //you will inhiret from GenericRepository
         }
 
+        
     }
 }
