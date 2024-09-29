@@ -12,6 +12,8 @@ namespace Ahmed.C42.PL.Controllers
 {
     public class EmployeeController : Controller
     {
+        #region Servieces
+
         private readonly IEmployeeService _employeeService;
         private readonly IWebHostEnvironment _environment;
         private readonly ILogger<EmployeeController> _logger;
@@ -24,7 +26,9 @@ namespace Ahmed.C42.PL.Controllers
             _employeeService = employeeService;
             _environment = environment;
             _logger = logger;
-        }
+        } 
+
+        #endregion
 
         #region Index
 
@@ -63,7 +67,9 @@ namespace Ahmed.C42.PL.Controllers
         {
             return View();
         }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(CreatedEmployeeDto employeeDto)
         {
             if (!ModelState.IsValid)
@@ -124,6 +130,7 @@ namespace Ahmed.C42.PL.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit([FromRoute] int id, EmployeeEditViewModel employeeEditVM)
         {
             if (!ModelState.IsValid)
@@ -191,6 +198,7 @@ namespace Ahmed.C42.PL.Controllers
         //}
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             var message = string.Empty;

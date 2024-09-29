@@ -15,6 +15,8 @@ namespace Ahmed.C42.PL.Controllers
     //Composition: DepartmentController has IDepartmentService  (if IDepartmentService? will agrigation)
     public class DepartmentController : Controller
     {
+        #region Serviecs
+
         #region without using IDepartmentService
         //private readonly IDepartmentRepository _departmentsRepo;
         ////public DepartmentController()//without using DI
@@ -71,7 +73,9 @@ namespace Ahmed.C42.PL.Controllers
             _departmentService = departmentService;
             _logger = logger;
             _environment = environment;
-        }
+        } 
+
+        #endregion
 
         #region Index
 
@@ -110,6 +114,7 @@ namespace Ahmed.C42.PL.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(CreatedDepartmentDto departmentDto)
         {
             if (!ModelState.IsValid)
@@ -168,6 +173,7 @@ namespace Ahmed.C42.PL.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit([FromRoute] int id, DepartmentEditViewModel departmentEditVM)
         {
             if (!ModelState.IsValid)
@@ -228,6 +234,7 @@ namespace Ahmed.C42.PL.Controllers
         //}
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
 

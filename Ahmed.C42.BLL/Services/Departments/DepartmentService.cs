@@ -46,13 +46,15 @@ namespace Ahmed.C42.BLL.Services.Departments
 
             var departments = _departmentRepository
                                     .GetAllAsIQueryable()
+                                    .Where(X => !X.IsDeleted)
                                     .Select(Department => new DepartmentDto
                                     {
                                         Id = Department.Id,
                                         Code = Department.Code,
                                         Name = Department.Name,
                                         CreationDateTime = Department.CreationDateTime,
-                                    }).AsNoTracking().ToList();//you can use Specification DP
+                                    })
+                                    .AsNoTracking().ToList();//you can use Specification DP
 
             return departments;
         }
