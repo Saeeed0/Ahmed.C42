@@ -41,43 +41,12 @@
                     <td>@Html.DisplayFor(modelItem => employee.Gender)</td>
                     <td>@Html.DisplayFor(modelItem => employee.EmployeeType)</td>
 
-                    <td>
-                        <a asp-action="Details" asp-route-id="@employee.Id" class="btn btn-warning">
-                            <i class="fas fa-eye"></i> Details
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-success">
-                            <i class="fas fa-edit"></i> Update
-                        </a>
-                    </td>
-                    <td>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-@employee.Id">
-                            <i class="fas fa-trash"></i> Delete
-                        </button>
+                    @* <partial name="_IndexButtonsPartial" model="employee.Id" /> <!-- sutable for send one property --> *@
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="deleteModal-@employee.Id" tabindex="-1" aria-labelledby="deleteModalLabel-@employee.Id" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteModalLabel-@employee.Id">Delete Employee</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to delete <strong>@employee.Name</strong>?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <form asp-action="Delete" asp-route-id="@employee.Id">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
+
+                    @* @Html.Partial("_IndexButtonsPartial", new EmployeeDto { Id = employee.Id, Name = employee.Name }) *@
+                    @Html.Partial("_IndexButtonsPartial", new ActionButtonsViewModel { Id = employee.Id, Name = employee.Name })
+
                 </tr>
             }
         </tbody>

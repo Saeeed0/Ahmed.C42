@@ -21,7 +21,7 @@ namespace Ahmed.C42.BLL.Services.Employees
         public IEnumerable<EmployeeDto> GetAllEmployees()
         {
             return _employeeRepository.GetAllAsIQueryable()
-                .Where(E=>E.IsDeleted)
+                .Where(E=>!E.IsDeleted)
                 .Select(employee => new EmployeeDto
                 {
                     Id = employee.Id,
