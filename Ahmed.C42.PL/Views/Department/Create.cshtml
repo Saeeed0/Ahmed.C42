@@ -1,6 +1,10 @@
 ﻿@model CreatedDepartmentDto;
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Department";
+    ViewData["Action"] = "Create";
+    ViewData["Value"] = "Create";
+    ViewData["GoToIndex"] = "Back To List";
+
 }
 
 <h1>Create</h1>
@@ -9,7 +13,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <h3 class="text-center">Create Department</h3>
-            <form asp-action="Create">
+            <!--<form asp-action="Create">
                 
                 <div asp-validation-summary="ModelOnly"></div>
                 
@@ -34,11 +38,13 @@
                 
                 <input type="submit" value="Create" class="btn btn-primary w-100"/> | 
                 <a asp-action="Index" class="btn btn-light">Back To List</a>
-            </form>
+            </form>-->
+            <partial name="Partial/DepartmentFormPartial"/>
         </div>
     </div>
 </div>
 
+@* <partial name="_ValidationScriptsPartial"/> *@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

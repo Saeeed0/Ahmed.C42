@@ -163,7 +163,7 @@ namespace Ahmed.C42.PL.Controllers
             if (department is null)
                 return NotFound();
 
-            return View(new DepartmentEditViewModel
+            return View(new DepartmentViewModel
             {
                 Code = department.Code,
                 Name = department.Name,
@@ -174,7 +174,7 @@ namespace Ahmed.C42.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([FromRoute] int id, DepartmentEditViewModel departmentEditVM)
+        public IActionResult Edit([FromRoute] int id, DepartmentViewModel departmentEditVM)
         {
             if (!ModelState.IsValid)
                 return View(departmentEditVM);

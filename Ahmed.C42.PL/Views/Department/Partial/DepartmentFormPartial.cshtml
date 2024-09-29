@@ -1,0 +1,27 @@
+﻿@model DepartmentViewModel
+
+<form asp-action="@ViewBag.Action">
+
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Code" class="col-form-label"></label>
+        <input asp-for="Code" class="form-control" />
+        <span asp-validation-for="Code" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Name" class="col-form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="Description" class="col-form-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="CreationDateTime" class="col-form-label"></label>
+        <input type="date" asp-for="CreationDateTime" class="form-control" />
+    </div>
+    <input type="submit" value="@ViewData["Value"]" class="btn btn-primary w-100" /> |
+    <a asp-action="Index" class="btn btn-light">@ViewData["GoToIndex"]</a>
+</form>

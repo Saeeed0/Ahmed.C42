@@ -1,6 +1,10 @@
-﻿@model DepartmentEditViewModel
+﻿@model DepartmentViewModel
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Department";
+    ViewData["Action"] = "Edit";
+    ViewData["Value"] = "Save";
+    ViewData["GoToIndex"] = "Cancel";
+
 }
 
 <h1>Edit</h1>
@@ -8,9 +12,9 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h3 class="text-center">Create Department</h3>
+            <h3 class="text-center">Edit Department</h3>
 
-            <form asp-action="Edit">
+            <!--<form asp-action="Edit">
 
                 <div asp-validation-summary="ModelOnly"></div>
 
@@ -35,11 +39,16 @@
 
                 <input  type="submit" value="Save" class="btn btn-primary w-100" /> |
                 <a asp-action="Index" class="btn btn-light">Cancel</a>
-            </form>
+            </form>-->
+
+            <partial name="Partial/DepartmentFormPartial" />
+
+
         </div>
     </div>
 </div>
 
+@* <partial name="_ValidationScriptsPartial"/> *@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
