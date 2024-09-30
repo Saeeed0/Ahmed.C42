@@ -73,7 +73,7 @@ namespace Ahmed.C42.PL.Controllers
             _departmentService = departmentService;
             _logger = logger;
             _environment = environment;
-        } 
+        }
 
         #endregion
 
@@ -123,16 +123,20 @@ namespace Ahmed.C42.PL.Controllers
             string message = string.Empty;
             try
             {
-                var result = _departmentService.CreateDepartment(departmentDto);
+                var created = _departmentService.CreateDepartment(departmentDto) > 0;
 
-                if (result > 0)
+                if (created)
+                {
+                    TempData["Success"] = "Department Is Created";
                     return RedirectToAction(nameof(Index));
+                }
                 else
                 {
-                    message = "Department is not Created";
+                    message = "Department Is Not Created";
                     ModelState.AddModelError(string.Empty, message);
                     return View(departmentDto);
                 }
+
             }
             catch (Exception ex)
             {
@@ -140,12 +144,12 @@ namespace Ahmed.C42.PL.Controllers
                 _logger.LogError(ex, ex.Message);//the Logging will be in Console(kestrel)
 
                 //Set Message
-                message = _environment.IsDevelopment() ? ex.Message : "an error occured during create the department :(";
+                message = _environment.IsDevelopment() ? ex.Message : "Department Is Not Created :(";
 
+                TempData["Success"] = message;
+                return RedirectToAction(nameof(Index));
             }
 
-            ModelState.AddModelError(string.Empty, message);
-            return View(departmentDto);
         }
 
         #endregion
