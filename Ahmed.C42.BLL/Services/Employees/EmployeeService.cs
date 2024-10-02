@@ -1,6 +1,7 @@
 ﻿using Ahmed.C42.BLL.CustomModel.Employees;
-using Ahmed.C42.DAL.Entities.Employee;
+using Ahmed.C42.DAL.Entities.Employees;
 using Ahmed.C42.DAL.Presistence.Repositories.Employees;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,8 @@ namespace Ahmed.C42.BLL.Services.Employees
         public IEnumerable<EmployeeDto> GetAllEmployees()
         {
             return _employeeRepository.GetAllAsIQueryable()
-                .Where(E=>!E.IsDeleted)
+                .Where(E => !E.IsDeleted)
+                .Include(E => E.Department)//Egar Loading
                 .Select(employee => new EmployeeDto
                 {
                     Id = employee.Id,
@@ -30,13 +32,14 @@ namespace Ahmed.C42.BLL.Services.Employees
                     IsActive = employee.IsActive,
                     Salary = employee.Salary,
                     Email = employee.Email,
+                    Department = employee.Department.Name,//Lazy Loading
                     Gender = employee.Gender,
                     EmployeeType = employee.EmployeeType
                     //Gender = employee.Gender.ToString(),
                     //EmployeeType = employee.EmployeeType.ToString()
 
                 }).ToList();
-            
+
         }
 
         public EmployeeDetailsDto GetEmployeeById(int id)
@@ -57,6 +60,8 @@ namespace Ahmed.C42.BLL.Services.Employees
                     HirringDate = employee.HirringDate,
                     Gender = employee.Gender,
                     EmployeeType = employee.EmployeeType,
+                    Department = employee.Department.Name,
+                    DepartmentId = employee.DepartmentId,
 
                 };
             return null;
@@ -74,6 +79,7 @@ namespace Ahmed.C42.BLL.Services.Employees
                 Email = employeeDto.Email,
                 PhoneNumber = employeeDto.PhoneNumber,
                 HirringDate = employeeDto.HirringDate,
+                DepartmentId = employeeDto.DepartmentID,
                 Gender = employeeDto.Gender,
                 EmployeeType = employeeDto.EmployeeType,
                 //CreatedOn = DateTime.UtcNow,//.HasDefaultValueSql("GETDATE()") in employeeconfiguration
@@ -98,6 +104,7 @@ namespace Ahmed.C42.BLL.Services.Employees
                 Email = employeeDto.Email,
                 PhoneNumber = employeeDto.PhoneNumber,
                 HirringDate = employeeDto.HirringDate,
+                DepartmentId = employeeDto.DepartmentId,
                 Gender = employeeDto.Gender,
                 EmployeeType = employeeDto.EmployeeType,
                 LastModifiedBy = 1,

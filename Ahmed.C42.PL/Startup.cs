@@ -64,7 +64,8 @@ namespace Ahmed.C42.PL
             #endregion
 
             services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))//should get DefaultConnection from Decrypt(DefaultConnection) method
+                options => options.UseLazyLoadingProxies()
+                                   .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))//should get DefaultConnection from Decrypt(DefaultConnection) method
                 );
 
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();

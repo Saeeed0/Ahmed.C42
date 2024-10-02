@@ -1,6 +1,7 @@
 ﻿using Ahmed.C42.BLL.CustomModel.Employees;
+using Ahmed.C42.BLL.Services.Departments;
 using Ahmed.C42.BLL.Services.Employees;
-using Ahmed.C42.DAL.Entities.Employee.Commen.Enum;
+using Ahmed.C42.DAL.Entities.Employees.Commen.Enum;
 using Ahmed.C42.PL.ViewModels.Employees;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,8 @@ namespace Ahmed.C42.PL.Controllers
         public EmployeeController(
             IEmployeeService employeeService,
             IWebHostEnvironment environment,
-            ILogger<EmployeeController> logger)
+            ILogger<EmployeeController> logger
+            /*,IDepartmentService departmentService*/)
         {
             _employeeService = employeeService;
             _environment = environment;
@@ -63,14 +65,16 @@ namespace Ahmed.C42.PL.Controllers
         #region Create
 
         [HttpGet]
-        public IActionResult Create()
+        public IActionResult Create(/*[FromServices] IDepartmentService departmentService*/)
         {
+            //ViewData["Departments"] = departmentService.GetAllDepartmnets();
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreatedEmployeeDto employeeDto)
+        public IActionResult Create(CreatedEmployeeDto employeeDto )
         {
             if (!ModelState.IsValid)
                 return View(employeeDto);
@@ -103,7 +107,7 @@ namespace Ahmed.C42.PL.Controllers
         #region Edit
 
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int? id, [FromServices] IDepartmentService departmentService)
         {
             if (id is null)
                 return BadRequest();
@@ -113,7 +117,9 @@ namespace Ahmed.C42.PL.Controllers
             if (employee == null)
                 return NotFound();
 
-            return View(new EmployeeEditViewModel()
+            ViewData["Departments"] = departmentService.GetAllDepartmnets();
+
+            return View(new UpdatedEmployeeDto()
             {
                 Name = employee.Name,
                 Age = employee.Age,
@@ -121,8 +127,9 @@ namespace Ahmed.C42.PL.Controllers
                 Email = employee.Email,
                 PhoneNumber = employee.PhoneNumber,
                 Address = employee.Address,
-                Gender = employee.Gender.ToString(),
-                EmployeeType = employee.EmployeeType.ToString(),
+                DepartmentId = employee.DepartmentId,
+                Gender = employee.Gender/*.ToString()*/,
+                EmployeeType = employee.EmployeeType/*.ToString()*/,
                 HirringDate = employee.HirringDate,
                 IsActive = employee.IsActive
                 
@@ -151,6 +158,7 @@ namespace Ahmed.C42.PL.Controllers
                     Address = employeeEditVM.Address,
                     IsActive= employeeEditVM.IsActive,
                     HirringDate = employeeEditVM.HirringDate,
+                    DepartmentId = employeeEditVM.DepartmentId,
                     Gender = Enum.Parse<Gender>(employeeEditVM.Gender),
                     EmployeeType = Enum.Parse<EmployeeType>(employeeEditVM.EmployeeType)
 

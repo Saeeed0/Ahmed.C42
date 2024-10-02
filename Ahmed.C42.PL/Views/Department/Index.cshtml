@@ -61,9 +61,11 @@ else
     <div class="w-25 bg-light" style="position: fixed; right: 0; bottom: 0">
         <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="successToast">
             <div class="toast-header">
-                <strong class="me-auto">Saeed</strong>
-                <small>Just now</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                <strong class="ml-auto">Saeed</strong>
+                <small class="mr-auto">15 Seconds ago</small>
+                <button type="button" class="btn-close mr-auto" data-bs-dismiss="toast" aria-label="Close">
+                    <i class="fas fa-trash"></i>
+                </button>
             </div>
             <div class="toast-body">
                 @TempData["Success"]
@@ -79,7 +81,7 @@ else
 
         toast.show(); // Show the toast notification
 
-        // Auto-hide after 5 seconds
+        // Auto-hide after 15 seconds
         setTimeout(function () {
             toast.hide();
         }, 15000);

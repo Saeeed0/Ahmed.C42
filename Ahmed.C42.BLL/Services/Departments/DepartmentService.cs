@@ -1,5 +1,5 @@
 ﻿using Ahmed.C42.BLL.CustomModel.Departments;
-using Ahmed.C42.DAL.Entities.Department;
+using Ahmed.C42.DAL.Entities.Departments;
 using Ahmed.C42.DAL.Presistence.Repositories.Departments;
 using Microsoft.EntityFrameworkCore;
 using System;

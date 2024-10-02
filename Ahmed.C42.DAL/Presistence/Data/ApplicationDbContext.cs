@@ -6,8 +6,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Ahmed.C42.DAL.Entities.Department;
-using Ahmed.C42.DAL.Entities.Employee;
+using Ahmed.C42.DAL.Entities.Departments;
+using Ahmed.C42.DAL.Entities.Employees;
 
 namespace Ahmed.C42.DAL.Presistence.Data
 {

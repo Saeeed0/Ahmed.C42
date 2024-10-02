@@ -1,8 +1,19 @@
-﻿@model EmployeeEditViewModel
-
+﻿@model UpdatedEmployeeDto
+@* @inject IDepartmentService _departmentService; *@
 @{
     ViewData["Title"] = "Edit Employee";
     ViewData["Action"] = "Edit";
+
+    var Departments = new SelectList(
+                        ViewData["Departments"] as IEnumerable<DepartmentDto> ?? Enumerable.Empty<DepartmentDto>(),
+                        nameof(DepartmentDto.Id),
+                        nameof(DepartmentDto.Name));
+
+    // var Departments = new SelectList(
+    //                     _departmentService.GetAllDepartmnets() ?? Enumerable.Empty<DepartmentDto>(),
+    //                     nameof(DepartmentDto.Id),
+    //                     nameof(DepartmentDto.Name));
+        
 }
 
 <h1>Edit Employee</h1>
@@ -76,29 +87,29 @@
             </div>
         </div>
 
+
         <div class="row mb-3">
-            <label asp-for="Gender" class="col-sm-2 col-form-label"></label>
+            <label asp-for="DepartmentId" class="col-sm-2 col-form-label"></label>
             <div class="col-sm-10">
-                <select asp-for="Gender" class="form-control">
-                    <option value="">-- Select Gender --</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                <select asp-for="DepartmentId" asp-items="@Departments" class="form-control">
                 </select>
-                <span asp-validation-for="Gender" class="text-danger"></span>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
             </div>
         </div>
 
-        <div class="row mb-3">
-            <label asp-for="EmployeeType" class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-10">
-                <select asp-for="EmployeeType" class="form-control">
-                    <option value="">-- Select Employee Type --</option>
-                    <option value="FullTime">Full-Time</option>
-                    <option value="PartTime">Part-Time</option>
-                </select>
-                <span asp-validation-for="EmployeeType" class="text-danger"></span>
-            </div>
+        
+        <div class="form-group">
+            <label asp-for="Gender" class="control-label"></label>
+            <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+            <span asp-validation-for="Gender" class="text-danger"></span>
         </div>
+
+        <div class="form-group">
+            <label asp-for="EmployeeType" class="control-label"></label>
+            <select asp-for="EmployeeType" class="form-control" asp-items="Html.GetEnumSelectList<EmployeeType>()"></select>
+            <span asp-validation-for="EmployeeType" class="text-danger"></span>
+        </div>
+
 
         <div class="row">
             <div class="col-sm-10 offset-sm-2">

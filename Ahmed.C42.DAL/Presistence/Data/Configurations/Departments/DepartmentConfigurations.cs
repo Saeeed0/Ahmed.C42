@@ -1,11 +1,6 @@
-﻿using Ahmed.C42.DAL.Entities.Department;
+﻿using Ahmed.C42.DAL.Entities.Departments;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ahmed.C42.DAL.Presistence.Data.Configurations.Departments
 {
@@ -20,6 +15,10 @@ namespace Ahmed.C42.DAL.Presistence.Data.Configurations.Departments
             builder.Property(D => D.CreatedOn).HasDefaultValueSql("GETUTCDATE()");//when create record will get its value
             builder.Property(D => D.LastModifiedOn).HasComputedColumnSql("GETDATE()");//when you change in record will compute the value(ex:Net Salary)
 
+            builder.HasMany(D => D.Employees)
+                   .WithOne(E => E.Department)
+                   .HasForeignKey(E => E.DepartmentId)
+                   .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Ahmed.C42.DAL.Entities.Employees;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Ahmed.C42.DAL.Entities.Department //foreach Module (Models.Department) usualy has more than model (Department)
+namespace Ahmed.C42.DAL.Entities.Departments //foreach Module (Models.Department) usualy has more than model (Department)
 {
     //Model Represent a Department Table
     public class Department : ModelBase
@@ -17,5 +15,8 @@ namespace Ahmed.C42.DAL.Entities.Department //foreach Module (Models.Department)
         public string? Description { get; set; } 
 
         public DateTime CreationDateTime { get; set; } //(ex: the Date that the Department Salse Created in the Company)
+
+        // Navigation property for one-to-many relationship
+        public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
     }
 }

@@ -1,10 +1,5 @@
-﻿using Ahmed.C42.DAL.Entities.Department;
-using Ahmed.C42.DAL.Presistence.Repositories._Generic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Ahmed.C42.DAL.Entities.Departments;
+using Ahmed.C42.DAL.Presistence.Repositories._Generic; 
 
 namespace Ahmed.C42.DAL.Presistence.Repositories.Departments
 {

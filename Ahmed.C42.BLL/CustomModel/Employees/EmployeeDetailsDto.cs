@@ -1,10 +1,6 @@
-﻿using Ahmed.C42.DAL.Entities.Employee.Commen.Enum;
+﻿using Ahmed.C42.DAL.Entities.Employees.Commen.Enum;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ahmed.C42.BLL.CustomModel.Employees
 {
@@ -44,6 +40,9 @@ namespace Ahmed.C42.BLL.CustomModel.Employees
 
         public Gender Gender { get; set; } 
 
-        public EmployeeType EmployeeType { get; set; } 
+        public EmployeeType EmployeeType { get; set; }
+
+        public string? Department { get; set; }   
+        public int? DepartmentId { get; set; }   
     }
 }

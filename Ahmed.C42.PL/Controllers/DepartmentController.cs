@@ -1,6 +1,5 @@
 ﻿using Ahmed.C42.BLL.CustomModel.Departments;
 using Ahmed.C42.BLL.Services.Departments;
-using Ahmed.C42.DAL.Entities.Department;
 using Ahmed.C42.PL.ViewModels.Departments;
 using Microsoft.AspNetCore.Hosting;
 

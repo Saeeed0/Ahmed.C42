@@ -21,6 +21,11 @@ namespace Ahmed.C42.PL.ViewModels.Employees
 
         public DateTime HirringDate { get; set; }
 
+
+        //[Display(Name = "Department")]
+        public int? DepartmentId { get; set; }
+        public string? Department { get; set; }
+
         public string Gender { get; set; } = null!;
 
         public string EmployeeType { get; set; } = null!;

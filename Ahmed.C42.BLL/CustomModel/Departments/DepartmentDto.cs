@@ -1,4 +1,4 @@
-﻿using Ahmed.C42.DAL.Entities.Department;
+﻿using Ahmed.C42.DAL.Entities.Departments;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

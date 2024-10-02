@@ -1,12 +1,7 @@
-﻿using Ahmed.C42.DAL.Entities.Employee.Commen.Enum;
+﻿using Ahmed.C42.DAL.Entities.Departments;
+using Ahmed.C42.DAL.Entities.Employees.Commen.Enum;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ahmed.C42.DAL.Entities.Employee
+namespace Ahmed.C42.DAL.Entities.Employees
 {
 
     public class Employee : ModelBase
@@ -31,6 +26,12 @@ namespace Ahmed.C42.DAL.Entities.Employee
 
         public EmployeeType EmployeeType { get; set; }
 
+
+        // Foreign Key
+        public int? DepartmentId { get; set; }
+
+        // Navigation property (singular, one employee works in one department)
+        public virtual Department? Department { get; set; }
 
         #region using Data Annotation
         //    [Required]
@@ -68,4 +69,7 @@ namespace Ahmed.C42.DAL.Entities.Employee
         #endregion
 
     }
+   
 }
+
+

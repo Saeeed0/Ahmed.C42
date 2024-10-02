@@ -1,5 +1,5 @@
-﻿using Ahmed.C42.DAL.Entities.Employee;
-using Ahmed.C42.DAL.Entities.Employee.Commen.Enum;
+﻿using Ahmed.C42.DAL.Entities.Employees;
+using Ahmed.C42.DAL.Entities.Employees.Commen.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
