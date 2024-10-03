@@ -19,10 +19,10 @@ namespace Ahmed.C42.BLL.Services.Employees
             _employeeRepository = employeeRepository;
         }
 
-        public IEnumerable<EmployeeDto> GetAllEmployees()
+        public IEnumerable<EmployeeDto> GetEmployees(string search)
         {
             return _employeeRepository.GetAllAsIQueryable()
-                .Where(E => !E.IsDeleted)
+                .Where(E => !E.IsDeleted && (string.IsNullOrEmpty(search) || E.Name.ToLower().Contains(search.ToLower())))
                 .Include(E => E.Department)//Egar Loading
                 .Select(employee => new EmployeeDto
                 {

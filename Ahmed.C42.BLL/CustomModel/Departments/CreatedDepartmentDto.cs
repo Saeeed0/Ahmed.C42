@@ -9,9 +9,12 @@ namespace Ahmed.C42.BLL.CustomModel.Departments
 {
     public class CreatedDepartmentDto
     {
+        [Required]
         public string Name { get; set; } = null!;
+        [Required]
         public string Code { get; set; } = null!;
         public string? Description { get; set; }
+
         [Display(Name = "Date Time of Creation")]
         public DateTime CreationDateTime { get; set; }
     }

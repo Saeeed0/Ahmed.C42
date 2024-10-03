@@ -1,6 +1,7 @@
 ﻿using Ahmed.C42.BLL.CustomModel.Employees;
 using Ahmed.C42.BLL.Services.Departments;
 using Ahmed.C42.BLL.Services.Employees;
+using Ahmed.C42.DAL.Entities.Employees;
 using Ahmed.C42.DAL.Entities.Employees.Commen.Enum;
 using Ahmed.C42.PL.ViewModels.Employees;
 using Microsoft.AspNetCore.Hosting;
@@ -28,17 +29,23 @@ namespace Ahmed.C42.PL.Controllers
             _employeeService = employeeService;
             _environment = environment;
             _logger = logger;
-        } 
+        }
 
         #endregion
 
         #region Index
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            var employee = _employeeService.GetAllEmployees();
-            return View(employee);
+            var employees = _employeeService.GetEmployees(search);
+            
+            //if (!string.IsNullOrEmpty(search))
+            //{
+            //    return PartialView("Partial/_EmployeeListPartial", employees); // Return the partial view for AJAX request
+            //}
+
+            return View(employees); // Return the full view for normal requests
         }
 
         #endregion
@@ -74,7 +81,7 @@ namespace Ahmed.C42.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreatedEmployeeDto employeeDto )
+        public IActionResult Create(CreatedEmployeeDto employeeDto)
         {
             if (!ModelState.IsValid)
                 return View(employeeDto);
@@ -132,7 +139,7 @@ namespace Ahmed.C42.PL.Controllers
                 EmployeeType = employee.EmployeeType/*.ToString()*/,
                 HirringDate = employee.HirringDate,
                 IsActive = employee.IsActive
-                
+
             });
         }
 
@@ -154,9 +161,9 @@ namespace Ahmed.C42.PL.Controllers
                     Age = employeeEditVM.Age,
                     Salary = employeeEditVM.Salary,
                     Email = employeeEditVM.Email,
-                    PhoneNumber= employeeEditVM.PhoneNumber,
+                    PhoneNumber = employeeEditVM.PhoneNumber,
                     Address = employeeEditVM.Address,
-                    IsActive= employeeEditVM.IsActive,
+                    IsActive = employeeEditVM.IsActive,
                     HirringDate = employeeEditVM.HirringDate,
                     DepartmentId = employeeEditVM.DepartmentId,
                     Gender = Enum.Parse<Gender>(employeeEditVM.Gender),
@@ -230,11 +237,24 @@ namespace Ahmed.C42.PL.Controllers
             }
 
             return RedirectToAction(nameof(Index));
-        } 
+        }
 
         #endregion
 
 
     }
 }
+/*
+Which is Better?
+Use Eager Loading if you are displaying related data (like employees with their departments) 
+and need both entities at the same time.
 
+Example: If you are showing a list of employees with their department names on an index page, 
+eager loading is a better option to ensure you load everything in a single query.
+
+Use Passing Data via ViewData if you're passing specific data (like a list of departments) 
+for form inputs and need more control over what data is sent to the view.
+
+Example: When creating or editing an employee, 
+you pass a list of Departments to the view to populate a dropdown for selecting the employee's department.
+*/

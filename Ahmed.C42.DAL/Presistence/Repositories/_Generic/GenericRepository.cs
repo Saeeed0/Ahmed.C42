@@ -14,9 +14,6 @@ namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
             _dbContext = applicationDbContext;
         }
 
-        //public IEnumerable<T> GetAll()
-        //    => _dbContext.Set<T>().AsNoTracking().ToList();//AsNoTracking(): Use this when you’re just reading data and don’t plan to modify or save it, making your queries faster.
-
         public T Get(int Id)
         {
             return _dbContext.Find<T>(Id);
@@ -26,6 +23,10 @@ namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
             ///if (T == null) T = _dbContext.Ts.FirstOrDefault(D => D.Id == Id);
             ///return T;
         }
+
+
+        //public IEnumerable<T> GetAll()
+        //    => _dbContext.Set<T>().AsNoTracking().ToList();//AsNoTracking(): Use this when you’re just reading data and don’t plan to modify or save it, making your queries faster.
 
         public IEnumerable<T> GetAll(bool withAsNoTracking = true)
         {

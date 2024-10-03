@@ -9,7 +9,7 @@ namespace Ahmed.C42.DAL.Entities.Departments //foreach Module (Models.Department
     public class Department : ModelBase
     {
         public string Name { get; set; } = null!;
-        [Required/*(ErrorMessage ="Code is Required ya Hamada!!")*/]//ErrorMessage Should inside View Modle
+        //[Required/*(ErrorMessage ="Code is Required ya Hamada!!")*/]//ErrorMessage Should inside View Modle
         public string Code { get; set; } = null!;
         //[Required]///We prefer select Required or any DataAnotation inside fluent API
         public string? Description { get; set; } 

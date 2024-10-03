@@ -1,0 +1,26 @@
+﻿@model IEnumerable<EmployeeDto>
+
+
+@foreach (var employee in Model)
+{
+    <tr>
+        <td>@Html.DisplayFor(modelItem => employee.Name)</td>
+        <td>@Html.DisplayFor(modelItem => employee.Age)</td>
+        <td>@Html.DisplayFor(modelItem => employee.Salary)</td>
+        <td>@Html.DisplayFor(modelItem => employee.IsActive)</td>
+        <td>@Html.DisplayFor(modelItem => employee.Email)</td>
+        <td>@Html.DisplayFor(modelItem => employee.Department)</td>
+        <td>@Html.DisplayFor(modelItem => employee.Gender)</td>
+        <td>@Html.DisplayFor(modelItem => employee.EmployeeType)</td>
+
+        @* <partial name="_IndexButtonsPartial" model="employee.Id" /> <!-- sutable for send one property --> *@
+
+
+        @* @Html.Partial("_IndexButtonsPartial", new EmployeeDto { Id = employee.Id, Name = employee.Name }) *@
+        @Html.Partial("_IndexButtonsPartial", new ActionButtonsViewModel { Id = employee.Id, Name = employee.Name })
+
+    </tr>
+}
+
+
+
