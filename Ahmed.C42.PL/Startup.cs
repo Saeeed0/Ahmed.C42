@@ -3,6 +3,7 @@ using Ahmed.C42.BLL.Services.Employees;
 using Ahmed.C42.DAL.Presistence.Data;
 using Ahmed.C42.DAL.Presistence.Repositories.Departments;
 using Ahmed.C42.DAL.Presistence.Repositories.Employees;
+using Ahmed.C42.DAL.Presistence.UintOfWork;
 using Ahmed.C42.PL.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -69,8 +70,9 @@ namespace Ahmed.C42.PL
                                    .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))//should get DefaultConnection from Decrypt(DefaultConnection) method
                 );
 
-            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            //services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            //services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IEmployeeService,EmployeeService>();

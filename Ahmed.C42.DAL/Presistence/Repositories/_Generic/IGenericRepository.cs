@@ -15,10 +15,10 @@ namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
         IQueryable<T> GetAllAsIQueryable();
         IEnumerable<T> GetAllAsIEnumerable();
 
-        int Add(T entity);
+        /*int*/ void Add(T entity);
 
-        int Update(T entity);
+        /*int*/ void Update(T entity);
 
-        int Delete(T entity);
+        /*int*/ void Delete(T entity);
     }
 }

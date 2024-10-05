@@ -51,22 +51,22 @@ namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
             return _dbContext.Set<T>().AsNoTracking();
         }
 
-        public int Add(T entity)
+        public /*int*/ void Add(T entity)
         {
             _dbContext.Set<T>().Add(entity);
-            return _dbContext.SaveChanges();
+            //return _dbContext.SaveChanges();
         }
-        public int Update(T entity)
+        public /*int*/ void Update(T entity)
         {
             _dbContext.Set<T>().Update(entity);
-            return _dbContext.SaveChanges();
+            //return _dbContext.SaveChanges();
         }
-        public int Delete(T entity)
+        public /*int*/ void Delete(T entity)
         {
             //_dbContext.Set<T>().Remove(entity);//Hard Delete
             entity.IsDeleted = true;//Soft Delete
             _dbContext.Set<T>().Update(entity);
-            return _dbContext.SaveChanges();
+            //return _dbContext.SaveChanges();
         }
     }
 }
