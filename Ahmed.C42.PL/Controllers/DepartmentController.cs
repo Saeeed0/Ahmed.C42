@@ -1,6 +1,7 @@
 ﻿using Ahmed.C42.BLL.CustomModel.Departments;
 using Ahmed.C42.BLL.Services.Departments;
 using Ahmed.C42.PL.ViewModels.Departments;
+using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 
 //using Ahmed.C42.DAL.Presistence.Repositories.Departments;
@@ -61,15 +62,18 @@ namespace Ahmed.C42.PL.Controllers
         #endregion
 
         private readonly IDepartmentService _departmentService;
+        private readonly IMapper _mapper;
         private readonly ILogger<DepartmentController> _logger;
         private readonly IWebHostEnvironment _environment;
 
         public DepartmentController(
             IDepartmentService departmentService,
+            IMapper mapper,
             ILogger<DepartmentController> logger,
             IWebHostEnvironment environment)//we don't prefer to use ILogger
         {
             _departmentService = departmentService;
+            _mapper = mapper;
             _logger = logger;
             _environment = environment;
         }
@@ -166,13 +170,17 @@ namespace Ahmed.C42.PL.Controllers
             if (department is null)
                 return NotFound();
 
-            return View(new DepartmentViewModel
+            var departmentVM = _mapper.Map<DepartmentDetailsDto, DepartmentViewModel>(department);
+            return View(departmentVM);
+
+            //Manual Mapping
+            /*return View(new DepartmentViewModel
             {
                 Code = department.Code,
                 Name = department.Name,
                 Description = department.Description,
                 CreationDateTime = department.CreationDateTime
-            });
+            });*/
         }
 
         [HttpPost]
@@ -186,14 +194,16 @@ namespace Ahmed.C42.PL.Controllers
 
             try
             {
-                var departmentToUpdate = new UpdatedDepartmentDto()
-                {
-                    Id = id,
-                    Code = departmentEditVM.Code,
-                    Name = departmentEditVM.Name,
-                    Description = departmentEditVM.Description,
-                    CreationDateTime = departmentEditVM.CreationDateTime
-                };
+                ///var departmentToUpdate = new UpdatedDepartmentDto()
+                ///{
+                ///    Id = id,
+                ///    Code = departmentEditVM.Code,
+                ///    Name = departmentEditVM.Name,
+                ///    Description = departmentEditVM.Description,
+                ///    CreationDateTime = departmentEditVM.CreationDateTime
+                ///};
+
+                var departmentToUpdate = _mapper.Map<UpdatedDepartmentDto>(departmentEditVM);
 
                 var updated = _departmentService.UpdateDepartment(departmentToUpdate) > 0;
 

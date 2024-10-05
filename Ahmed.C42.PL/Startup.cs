@@ -3,6 +3,7 @@ using Ahmed.C42.BLL.Services.Employees;
 using Ahmed.C42.DAL.Presistence.Data;
 using Ahmed.C42.DAL.Presistence.Repositories.Departments;
 using Ahmed.C42.DAL.Presistence.Repositories.Employees;
+using Ahmed.C42.PL.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -73,6 +74,9 @@ namespace Ahmed.C42.PL
 
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IEmployeeService,EmployeeService>();
+
+            //services.AddAutoMapper(typeof(MappingProfile));
+            services.AddAutoMapper(M => M.AddProfile(new MappingProfile()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
