@@ -23,10 +23,10 @@ namespace Ahmed.C42.BLL.Services.Employees
             _attatchmentService = attatchmentService;
         }
 
-        public IEnumerable<EmployeeDto> GetEmployees(string search)
+        public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(string search)
         {
             var _employeeRepository = _unitOfWork.EmployeeRepository;
-            return _employeeRepository.GetAllAsIQueryable()
+            return await _employeeRepository.GetAllAsIQueryable()
                 .Where(E => !E.IsDeleted && (string.IsNullOrEmpty(search) || E.Name.ToLower().Contains(search.ToLower())))
                 .Include(E => E.Department)//Egar Loading
                 .Select(employee => new EmployeeDto
@@ -43,15 +43,15 @@ namespace Ahmed.C42.BLL.Services.Employees
                     //Gender = employee.Gender.ToString(),
                     //EmployeeType = employee.EmployeeType.ToString()
 
-                }).ToList();
+                }).ToListAsync();
 
         }
 
-        public EmployeeDetailsDto GetEmployeeById(int id)
+        public async Task<EmployeeDetailsDto> GetEmployeeByIdAsync(int id)
         {
             var _employeeRepository = _unitOfWork.EmployeeRepository;
 
-            var employee = _employeeRepository.Get(id);
+            var employee = await _employeeRepository.GetAsync(id);
             if (employee is not null)
                 return new EmployeeDetailsDto()
                 {
@@ -75,7 +75,7 @@ namespace Ahmed.C42.BLL.Services.Employees
             return null;
         }
 
-        public int CreateEmployee(CreatedEmployeeDto employeeDto)
+        public async Task<int> CreateEmployeeAsync(CreatedEmployeeDto employeeDto)
         {
             var employee = new Employee()
             {
@@ -98,13 +98,13 @@ namespace Ahmed.C42.BLL.Services.Employees
             };
 
             if (employeeDto.Image is not null)
-                employee.Image = _attatchmentService.Upload(employeeDto.Image, "images");
+                employee.Image = await _attatchmentService.UploadAsync(employeeDto.Image, "images");
 
             _unitOfWork.EmployeeRepository.Add(employee);
-            return _unitOfWork.Complete();
+            return await _unitOfWork.CompleteAsync();
         }
 
-        public int UpdateEmployee(UpdatedEmployeeDto employeeDto)
+        public async Task<int> UpdateEmployeeAsync(UpdatedEmployeeDto employeeDto)
         {
             var employee = new Employee()
             {
@@ -125,19 +125,19 @@ namespace Ahmed.C42.BLL.Services.Employees
 
             };
             _unitOfWork.EmployeeRepository.Update(employee);
-            return _unitOfWork.Complete();
+            return await _unitOfWork.CompleteAsync();
         }
 
-        public bool DeleteEmployee(int id)
+        public async Task<bool> DeleteEmployeeAsync(int id)
         {
             var _employeeReository = _unitOfWork.EmployeeRepository;
 
-            var employee = _employeeReository.Get(id);
+            var employee = await _employeeReository.GetAsync(id);
 
             if (employee is not null)
                 _employeeReository.Delete(employee);
 
-            return _unitOfWork.Complete()>0;
+            return await _unitOfWork.CompleteAsync() > 0;
         }
 
 

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading.Tasks;
 
 namespace Ahmed.C42.PL.Controllers
 {
@@ -36,9 +37,9 @@ namespace Ahmed.C42.PL.Controllers
         #region Index
 
         [HttpGet]
-        public IActionResult Index(string search)
+        public async Task<IActionResult> Index(string search)
         {
-            var employees = _employeeService.GetEmployees(search);
+            var employees = await _employeeService.GetEmployeesAsync(search);
 
             //if (!string.IsNullOrEmpty(search))
             //{
@@ -53,12 +54,12 @@ namespace Ahmed.C42.PL.Controllers
         #region Details
 
         [HttpGet]
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id is null)
                 return BadRequest();
 
-            var emloyee = _employeeService.GetEmployeeById(id.Value);
+            var emloyee = await _employeeService.GetEmployeeByIdAsync(id.Value);
 
             if (emloyee is null)
                 return NotFound();
@@ -81,7 +82,7 @@ namespace Ahmed.C42.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreatedEmployeeDto employeeDto)
+        public async Task<IActionResult> Create(CreatedEmployeeDto employeeDto)
         {
             if (!ModelState.IsValid)
                 return View(employeeDto);
@@ -90,7 +91,7 @@ namespace Ahmed.C42.PL.Controllers
 
             try
             {
-                var result = _employeeService.CreateEmployee(employeeDto);
+                var result = await _employeeService.CreateEmployeeAsync(employeeDto);
                 if (result > 0)
                     return RedirectToAction(nameof(Index));
 
@@ -114,17 +115,17 @@ namespace Ahmed.C42.PL.Controllers
         #region Edit
 
         [HttpGet]
-        public IActionResult Edit(int? id, [FromServices] IDepartmentService departmentService)
+        public async Task<IActionResult> Edit(int? id, [FromServices] IDepartmentService departmentService)
         {
             if (id is null)
                 return BadRequest();
 
-            var employee = _employeeService.GetEmployeeById(id.Value);
+            var employee = await _employeeService.GetEmployeeByIdAsync(id.Value);
 
             if (employee == null)
                 return NotFound();
 
-            ViewData["Departments"] = departmentService.GetAllDepartmnets();
+            ViewData["Departments"] = await departmentService.GetAllDepartmnetsAsync();
 
             return View(new UpdatedEmployeeDto()
             {
@@ -145,7 +146,7 @@ namespace Ahmed.C42.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([FromRoute] int id, EmployeeEditViewModel employeeEditVM)
+        public async Task<IActionResult> Edit([FromRoute] int id, EmployeeEditViewModel employeeEditVM)
         {
             if (!ModelState.IsValid)
                 return View(employeeEditVM);
@@ -171,7 +172,7 @@ namespace Ahmed.C42.PL.Controllers
 
                 };
 
-                var updated = _employeeService.UpdateEmployee(employeeToUpdate);
+                var updated = await _employeeService.UpdateEmployeeAsync(employeeToUpdate);
 
                 if (updated > 0)
                     return RedirectToAction(nameof(Index));
@@ -214,13 +215,13 @@ namespace Ahmed.C42.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var message = string.Empty;
 
             try
             {
-                var deleted = _employeeService.DeleteEmployee(id);
+                var deleted = await _employeeService.DeleteEmployeeAsync(id);
 
                 if (deleted)
                     return RedirectToAction(nameof(Index));

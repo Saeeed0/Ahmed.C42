@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading.Tasks;
 
 namespace Ahmed.C42.PL.Controllers
 {   //Inheritance: DepartmentController is a Controller
@@ -83,9 +84,9 @@ namespace Ahmed.C42.PL.Controllers
         #region Index
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var department = _departmentService.GetAllDepartmnets();
+            var department = await _departmentService.GetAllDepartmnetsAsync();
             return View(department);
         }
 
@@ -94,11 +95,11 @@ namespace Ahmed.C42.PL.Controllers
         #region Details
 
         [HttpGet]
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (!id.HasValue)
                 return BadRequest();
-            var department = _departmentService.GetDepartmentById(id.Value);
+            var department = await _departmentService.GetDepartmentByIdAsync(id.Value);
 
             if (department is null)
                 return NotFound();
@@ -118,7 +119,7 @@ namespace Ahmed.C42.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreatedDepartmentDto departmentDto)
+        public async Task<IActionResult> Create(CreatedDepartmentDto departmentDto)
         {
             if (!ModelState.IsValid)
                 return View(departmentDto);
@@ -126,7 +127,7 @@ namespace Ahmed.C42.PL.Controllers
             string message = string.Empty;
             try
             {
-                var created = _departmentService.CreateDepartment(departmentDto) > 0;
+                var created = await _departmentService.CreateDepartmentAsync(departmentDto) > 0;
 
                 if (created)
                 {
@@ -160,12 +161,12 @@ namespace Ahmed.C42.PL.Controllers
         #region Edit
 
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (!id.HasValue)
                 return BadRequest();
 
-            var department = _departmentService.GetDepartmentById(id.Value);
+            var department = await _departmentService.GetDepartmentByIdAsync(id.Value);
 
             if (department is null)
                 return NotFound();
@@ -185,7 +186,7 @@ namespace Ahmed.C42.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([FromRoute] int id, DepartmentViewModel departmentEditVM)
+        public async Task<IActionResult> Edit([FromRoute] int id, DepartmentViewModel departmentEditVM)
         {
             if (!ModelState.IsValid)
                 return View(departmentEditVM);
@@ -205,7 +206,7 @@ namespace Ahmed.C42.PL.Controllers
 
                 var departmentToUpdate = _mapper.Map<UpdatedDepartmentDto>(departmentEditVM);
 
-                var updated = _departmentService.UpdateDepartment(departmentToUpdate) > 0;
+                var updated = await _departmentService.UpdateDepartmentAsync(departmentToUpdate) > 0;
 
                 if (updated)
                     return RedirectToAction(nameof(Index));
@@ -248,14 +249,14 @@ namespace Ahmed.C42.PL.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
 
             var message = string.Empty;
 
             try
             {
-                var deleted = _departmentService.DeleteDepartment(id);
+                var deleted = await _departmentService.DeleteDepartmentAsync(id);
                 if (deleted)
                     return RedirectToAction(nameof(Index));
 

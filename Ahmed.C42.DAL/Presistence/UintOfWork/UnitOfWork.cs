@@ -21,14 +21,14 @@ namespace Ahmed.C42.DAL.Presistence.UintOfWork
         {
             _dbContext = dbContext;
         }
-        public int Complete()
+        public async Task<int> CompleteAsync()
         {
-            return _dbContext.SaveChanges();// Save all changes in one transaction
+            return await _dbContext.SaveChangesAsync();// Save all changes in one transaction
         }
 
-        public void Dispose()
+        public async ValueTask DisposeAsync()
         {
-            _dbContext.Dispose();
+             await _dbContext.DisposeAsync();
         }
     }
 }

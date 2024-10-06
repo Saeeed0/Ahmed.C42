@@ -9,11 +9,11 @@ namespace Ahmed.C42.BLL.Services.Departments
 {
     public interface IDepartmentService
     {
-        IEnumerable<DepartmentDto> GetAllDepartmnets();
-        DepartmentDetailsDto GetDepartmentById(int id);
-        int CreateDepartment(CreatedDepartmentDto department);
-        int UpdateDepartment(UpdatedDepartmentDto department);
+        Task<IEnumerable<DepartmentDto>> GetAllDepartmnetsAsync();
+        Task<DepartmentDetailsDto> GetDepartmentByIdAsync(int id);
+        Task<int> CreateDepartmentAsync(CreatedDepartmentDto department);
+        Task<int> UpdateDepartmentAsync(UpdatedDepartmentDto department);
 
-        bool DeleteDepartment(int id);
+        Task<bool> DeleteDepartmentAsync(int id);
     }
 }

@@ -9,14 +9,14 @@ namespace Ahmed.C42.BLL.Services.Employees
 {
     public interface IEmployeeService
     {
-        IEnumerable<EmployeeDto> GetEmployees(string search);
+        Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(string search);
 
-        EmployeeDetailsDto GetEmployeeById(int id);
+        Task<EmployeeDetailsDto> GetEmployeeByIdAsync(int id);
 
-        int CreateEmployee(CreatedEmployeeDto employeeDto);
+        Task<int> CreateEmployeeAsync(CreatedEmployeeDto employeeDto);
 
-        int UpdateEmployee(UpdatedEmployeeDto employeeDto);
+        Task<int> UpdateEmployeeAsync(UpdatedEmployeeDto employeeDto);
 
-        bool DeleteEmployee(int id);
+        Task<bool> DeleteEmployeeAsync(int id);
     }
 }

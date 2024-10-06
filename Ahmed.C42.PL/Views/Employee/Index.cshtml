@@ -85,7 +85,7 @@
 
 
                     @* @Html.Partial("_IndexButtonsPartial", new EmployeeDto { Id = employee.Id, Name = employee.Name }) *@
-                    @Html.Partial("_IndexButtonsPartial", new ActionButtonsViewModel { Id = employee.Id, Name = employee.Name })
+                    @await Html.PartialAsync("_IndexButtonsPartial", new ActionButtonsViewModel { Id = employee.Id, Name = employee.Name })
 
                 </tr>
             }

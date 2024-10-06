@@ -13,7 +13,7 @@ namespace Ahmed.C42.BLL.Common.Attachments
         private List<string> _allowedExtensions = new(){ ".png", ".jpg", ".jpeg" };
         private const int _allowedMaxSive = 20_971_52;
 
-        public string Upload(IFormFile file, string folderName)
+        public async Task<string> UploadAsync(IFormFile file, string folderName)
         {
             var extension = Path.GetExtension(file.FileName);
 
@@ -41,7 +41,7 @@ namespace Ahmed.C42.BLL.Common.Attachments
 
             //using var fileStream = File.Create(filePath);
 
-            file.CopyTo(fileStream);
+            await file.CopyToAsync(fileStream);
 
             return fileName;
         }

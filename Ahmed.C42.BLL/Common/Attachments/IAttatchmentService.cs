@@ -9,7 +9,7 @@ namespace Ahmed.C42.BLL.Common.Attachments
 {
     public interface IAttatchmentService
     {
-        string Upload(IFormFile file ,string folderName);
+        Task<string> UploadAsync(IFormFile file ,string folderName);
         bool Delete(string filePath);
     }
 }

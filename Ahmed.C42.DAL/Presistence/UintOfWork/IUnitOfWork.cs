@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Ahmed.C42.DAL.Presistence.UintOfWork
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IAsyncDisposable
     {
         public IEmployeeRepository EmployeeRepository { get; /*set;*/ }
         public IDepartmentRepository DepartmentRepository { get; /*set;*/ }
 
-        public int Complete();
+        public Task<int> CompleteAsync();
     }
 }

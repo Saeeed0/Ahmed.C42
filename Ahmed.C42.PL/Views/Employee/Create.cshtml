@@ -16,7 +16,7 @@
     //                         nameof(DepartmentDto.Name));
 
     var Departments = new SelectList(
-                            _departmentService.GetAllDepartmnets() ?? Enumerable.Empty<DepartmentDto>(),
+                            await _departmentService.GetAllDepartmnetsAsync() ?? Enumerable.Empty<DepartmentDto>(),
                             nameof(DepartmentDto.Id),
                             nameof(DepartmentDto.Name));
 }

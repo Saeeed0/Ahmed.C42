@@ -3,6 +3,7 @@ using Ahmed.C42.DAL.Presistence.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
 {
@@ -14,9 +15,9 @@ namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
             _dbContext = applicationDbContext;
         }
 
-        public T Get(int Id)
+        public async Task<T> GetAsync(int Id)
         {
-            return _dbContext.Find<T>(Id);
+            return await _dbContext.FindAsync<T>(Id);
             ///find first in Local if don't exist find in DB , search using only the primary key of the entity
             ///return _dbContext.Ts.Find(Id);//find first in Local if don't exist find in DB
             ///var T = _dbContext.Ts.Local.FirstOrDefault(D => D.Id == Id);
@@ -28,11 +29,11 @@ namespace Ahmed.C42.DAL.Presistence.Repositories._Generic
         //public IEnumerable<T> GetAll()
         //    => _dbContext.Set<T>().AsNoTracking().ToList();//AsNoTracking(): Use this when you’re just reading data and don’t plan to modify or save it, making your queries faster.
 
-        public IEnumerable<T> GetAll(bool withAsNoTracking = true)
+        public async Task<IEnumerable<T>> GetAllAsync(bool withAsNoTracking = true)
         {
             if (withAsNoTracking)
-                return _dbContext.Set<T>().Where(X => !X.IsDeleted).AsNoTracking().ToList(); 
-            return _dbContext.Set<T>().Where(X => !X.IsDeleted).ToList();
+                return await _dbContext.Set<T>().Where(X => !X.IsDeleted).AsNoTracking().ToListAsync(); 
+            return await _dbContext.Set<T>().Where(X => !X.IsDeleted).ToListAsync();
 
             //if (withAsNoTracking)
             //    return _dbContext.Set<T>().AsNoTracking().ToList();

@@ -19,7 +19,7 @@ namespace Ahmed.C42.BLL.Services.Departments
         {
             _unitOfWork = unitOfWork;
         }
-        public IEnumerable<DepartmentDto> GetAllDepartmnets()
+        public async Task<IEnumerable<DepartmentDto>> GetAllDepartmnetsAsync()
         {
             #region this issue will get all Department data and you Don't need all this
             //var departments = _unitOfWork.DepartmentRepository.GetAll();
@@ -45,7 +45,7 @@ namespace Ahmed.C42.BLL.Services.Departments
             //// you can install AutoMapper.dll for automatic mapping 
             #endregion
 
-            var departments = _unitOfWork.DepartmentRepository
+            var departments = await _unitOfWork.DepartmentRepository
                                     .GetAllAsIQueryable()
                                     .Where(X => !X.IsDeleted)
                                     .Select(Department => new DepartmentDto
@@ -55,14 +55,14 @@ namespace Ahmed.C42.BLL.Services.Departments
                                         Name = Department.Name,
                                         CreationDateTime = Department.CreationDateTime,
                                     })
-                                    .AsNoTracking().ToList();//you can use Specification DP
+                                    .AsNoTracking().ToListAsync();//you can use Specification DP
 
             return departments;
         }
 
-        public DepartmentDetailsDto GetDepartmentById(int id)
+        public async Task<DepartmentDetailsDto> GetDepartmentByIdAsync(int id)
         {
-            var department = _unitOfWork.DepartmentRepository.Get(id);
+            var department = await _unitOfWork.DepartmentRepository.GetAsync(id);
             if (department is not null /*is { }//.net8*/)
                 return new DepartmentDetailsDto()
                 {
@@ -80,7 +80,7 @@ namespace Ahmed.C42.BLL.Services.Departments
 
         }
 
-        public int CreateDepartment(CreatedDepartmentDto departmentDto)
+        public async Task<int> CreateDepartmentAsync(CreatedDepartmentDto departmentDto)
         {
             var department = new Department()
             {
@@ -94,9 +94,9 @@ namespace Ahmed.C42.BLL.Services.Departments
                 LastModifiedOn = DateTime.UtcNow,
             };
             _unitOfWork.DepartmentRepository.Add(department);
-            return _unitOfWork.Complete();
+            return await _unitOfWork.CompleteAsync();
         }
-        public int UpdateDepartment(UpdatedDepartmentDto departmentDto)
+        public async Task<int> UpdateDepartmentAsync(UpdatedDepartmentDto departmentDto)
         {
             var department = new Department()
             {
@@ -109,17 +109,17 @@ namespace Ahmed.C42.BLL.Services.Departments
                 LastModifiedOn = DateTime.UtcNow,
             };
             _unitOfWork.DepartmentRepository.Update(department);
-            return _unitOfWork.Complete();
+            return await _unitOfWork.CompleteAsync();
         }
 
-        public bool DeleteDepartment(int id)
+        public async Task<bool> DeleteDepartmentAsync(int id)
         {
             var _departmentRepository = _unitOfWork.DepartmentRepository;
-            var department = _departmentRepository.Get(id);
+            var department = await _departmentRepository.GetAsync(id);
             if (department is not null)
                 _departmentRepository.Delete(department);
 
-            return _unitOfWork.Complete() > 0;
+            return await _unitOfWork.CompleteAsync() > 0;
         }
 
 
