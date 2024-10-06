@@ -31,5 +31,6 @@ namespace Ahmed.C42.BLL.CustomModel.Employees
         //[Display(Name = "Department")]
         public string? Department { get; set; }
 
+        public string? Image { get; set; }
     }
 }

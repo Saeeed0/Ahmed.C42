@@ -1,4 +1,5 @@
 ﻿using Ahmed.C42.DAL.Entities.Employees.Commen.Enum;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -45,6 +46,7 @@ namespace Ahmed.C42.BLL.CustomModel.Employees
 
         public EmployeeType EmployeeType { get; set; }
 
+        public IFormFile? Image { get; set; }
 
     }
 }

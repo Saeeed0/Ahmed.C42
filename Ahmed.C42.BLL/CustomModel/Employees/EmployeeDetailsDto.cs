@@ -43,6 +43,9 @@ namespace Ahmed.C42.BLL.CustomModel.Employees
         public EmployeeType EmployeeType { get; set; }
 
         public string? Department { get; set; }   
-        public int? DepartmentId { get; set; }   
+        public int? DepartmentId { get; set; }
+
+        public string? Image { get; set; }
+
     }
 }

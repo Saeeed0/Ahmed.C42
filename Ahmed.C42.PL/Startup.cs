@@ -1,3 +1,4 @@
+using Ahmed.C42.BLL.Common.Attachments;
 using Ahmed.C42.BLL.Services.Departments;
 using Ahmed.C42.BLL.Services.Employees;
 using Ahmed.C42.DAL.Presistence.Data;
@@ -76,6 +77,8 @@ namespace Ahmed.C42.PL
 
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IEmployeeService,EmployeeService>();
+
+            services.AddTransient<IAttatchmentService,AttachmentService>();
 
             //services.AddAutoMapper(typeof(MappingProfile));
             services.AddAutoMapper(M => M.AddProfile(new MappingProfile()));

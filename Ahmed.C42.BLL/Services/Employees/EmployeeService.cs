@@ -1,4 +1,5 @@
-﻿using Ahmed.C42.BLL.CustomModel.Employees;
+﻿using Ahmed.C42.BLL.Common.Attachments;
+using Ahmed.C42.BLL.CustomModel.Employees;
 using Ahmed.C42.DAL.Entities.Employees;
 using Ahmed.C42.DAL.Presistence.Repositories.Employees;
 using Ahmed.C42.DAL.Presistence.UintOfWork;
@@ -14,10 +15,12 @@ namespace Ahmed.C42.BLL.Services.Employees
     public class EmployeeService : IEmployeeService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IAttatchmentService _attatchmentService;
 
-        public EmployeeService(IUnitOfWork unitOfWork)//Ask CLR for creating Object from class implementing IUnitOfWork
+        public EmployeeService(IUnitOfWork unitOfWork, IAttatchmentService attatchmentService)//Ask CLR for creating Object from class implementing IUnitOfWork
         {
             _unitOfWork = unitOfWork;
+            _attatchmentService = attatchmentService;
         }
 
         public IEnumerable<EmployeeDto> GetEmployees(string search)
@@ -92,6 +95,9 @@ namespace Ahmed.C42.BLL.Services.Employees
                 LastModifiedOn = DateTime.UtcNow
 
             };
+
+            if (employeeDto.Image is not null)
+                employee.Image = _attatchmentService.Upload(employeeDto.Image, "images");
 
             _unitOfWork.EmployeeRepository.Add(employee);
             return _unitOfWork.Complete();

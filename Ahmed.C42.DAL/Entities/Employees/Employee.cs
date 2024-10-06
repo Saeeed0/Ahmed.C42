@@ -33,6 +33,8 @@ namespace Ahmed.C42.DAL.Entities.Employees
         // Navigation property (singular, one employee works in one department)
         public virtual Department? Department { get; set; }
 
+        public string? Image { get; set; }
+
         #region using Data Annotation
         //    [Required]
         //    [MaxLength(50, ErrorMessage = "Max Length of Name is 50 Chars")]
