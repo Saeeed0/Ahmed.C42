@@ -67,6 +67,7 @@ namespace Ahmed.C42.BLL.Services.Employees
                     HirringDate = employee.HirringDate,
                     Gender = employee.Gender,
                     EmployeeType = employee.EmployeeType,
+                    Image = employee.Image,
                     Department = employee.Department.Name,
                     DepartmentId = employee.DepartmentId,
 

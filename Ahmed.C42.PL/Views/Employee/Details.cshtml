@@ -4,7 +4,11 @@
 }
 
 <h1>Employee Details</h1>
-
+<div class="row justify-content-start align-items-start">
+    <div class="col-4">
+        <img src="~/files/images/@Model.Image" class="img-fluid rounded-2 my-3 bg-danger" alt="Employee Image" />
+    </div>
+</div>
 <!-- Navigation bar using Bootstrap 5 tabs -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
@@ -22,6 +26,7 @@
         <br />
         <h3>General</h3>
         <ul class="list-unstyled">
+            
             <li>
                 <div class="form-group mb-3">
                     <label asp-for="Name" class="col-form-label"></label>
@@ -35,10 +40,10 @@
                 </div>
             </li>
             @* <li>
-                <div class="form-group mb-3">
-                    <label asp-for="DepartmentId" class="col-form-label"></label>
-                    <input asp-for="DepartmentId" class="form-control" readonly>
-                </div>
+            <div class="form-group mb-3">
+            <label asp-for="DepartmentId" class="col-form-label"></label>
+            <input asp-for="DepartmentId" class="form-control" readonly>
+            </div>
             </li> *@
             <li>
                 <div class="form-group mb-3">
