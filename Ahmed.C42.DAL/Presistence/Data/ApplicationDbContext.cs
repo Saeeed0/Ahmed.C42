@@ -1,17 +1,13 @@
-﻿using Ahmed.C42.DAL.Presistence.Data.Configurations;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Ahmed.C42.DAL.Entities.Departments;
+﻿using Ahmed.C42.DAL.Entities.Departments;
 using Ahmed.C42.DAL.Entities.Employees;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Ahmed.C42.DAL.Presistence.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         //public ApplicationDbContext():base(new DbContextOptions<ApplicationDbContext>())//Without DI
         //{//Every Where any code ask obj form ApplicationDbContext the CLR will Create this obj => this issue may case opening More than One Connection with SQL Server
@@ -27,10 +23,15 @@ namespace Ahmed.C42.DAL.Presistence.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)//You can define relationships (like one-to-many, many-to-many, etc.) between your entities using the Fluent API within OnModelCreating 
         {
+            base.OnModelCreating(modelBuilder);
+
             //modelBuilder.ApplyConfiguration<Department>(new DepartmentConfigurations());
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());//ModelBuilder allows you to use the Fluent API to configure entity relationships, keys, constraints, and other database-specific configurations and how your models are mapped compared to data annotations.
         }
         public DbSet<Department> Departments { get; set; }//The DbSet<TEntity> maps an entity class (TEntity) to a corresponding database table
         public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<IdentityUser> IdentityUsers { get; set; }
+        public DbSet<IdentityRole> IdentityRoles { get; set; }
     }
 }
