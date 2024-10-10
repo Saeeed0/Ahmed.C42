@@ -1,5 +1,6 @@
 ﻿using Ahmed.C42.DAL.Entities.Departments;
 using Ahmed.C42.DAL.Entities.Employees;
+using Ahmed.C42.DAL.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +8,7 @@ using System.Reflection;
 
 namespace Ahmed.C42.DAL.Presistence.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         //public ApplicationDbContext():base(new DbContextOptions<ApplicationDbContext>())//Without DI
         //{//Every Where any code ask obj form ApplicationDbContext the CLR will Create this obj => this issue may case opening More than One Connection with SQL Server
@@ -31,7 +32,7 @@ namespace Ahmed.C42.DAL.Presistence.Data
         public DbSet<Department> Departments { get; set; }//The DbSet<TEntity> maps an entity class (TEntity) to a corresponding database table
         public DbSet<Employee> Employees { get; set; }
 
-        public DbSet<IdentityUser> IdentityUsers { get; set; }
-        public DbSet<IdentityRole> IdentityRoles { get; set; }
+        //public DbSet<IdentityUser> IdentityUsers { get; set; }
+        //public DbSet<IdentityRole> IdentityRoles { get; set; }
     }
 }

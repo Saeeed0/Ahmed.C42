@@ -1,6 +1,7 @@
 using Ahmed.C42.BLL.Common.Attachments;
 using Ahmed.C42.BLL.Services.Departments;
 using Ahmed.C42.BLL.Services.Employees;
+using Ahmed.C42.DAL.Entities.Identity;
 using Ahmed.C42.DAL.Presistence.Data;
 using Ahmed.C42.DAL.Presistence.Repositories.Departments;
 using Ahmed.C42.DAL.Presistence.Repositories.Employees;
@@ -9,6 +10,7 @@ using Ahmed.C42.PL.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -76,13 +78,41 @@ namespace Ahmed.C42.PL
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<IDepartmentService, DepartmentService>();
-            services.AddScoped<IEmployeeService,EmployeeService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
 
-            services.AddTransient<IAttatchmentService,AttachmentService>();
+
+
+            services.AddTransient<IAttatchmentService, AttachmentService>();
 
             //services.AddAutoMapper(typeof(MappingProfile));
             services.AddAutoMapper(M => M.AddProfile(new MappingProfile()));
-        }
+
+
+			//services.AddScoped<UserManager<ApplicationUser>>();
+			//services.AddScoped<SignInManager<ApplicationUser>>();
+			//services.AddScoped<RoleManager<IdentityRole>>();
+
+			//services.AddIdentity<ApplicationUser, IdentityRole>();
+
+			///Register Security Services(Majer and its Dependencies) and Add Configurations
+			services.AddIdentity<ApplicationUser, IdentityRole>(option =>
+			{
+				option.Password.RequireDigit = true;
+				option.Password.RequireNonAlphanumeric = true;
+				option.Password.RequiredLength = 5;
+				option.Password.RequireUppercase = true;
+				option.Password.RequireLowercase = true;
+				option.Password.RequiredUniqueChars = 1;
+
+				option.User.RequireUniqueEmail = true;
+				//option.User.AllowedUserNameCharacters = "asdfhlwer1234";
+
+				option.Lockout.AllowedForNewUsers = true;
+				option.Lockout.MaxFailedAccessAttempts = 5;
+				option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(50);
+			})
+				.AddEntityFrameworkStores<ApplicationDbContext>();
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
