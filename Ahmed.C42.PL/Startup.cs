@@ -116,7 +116,8 @@ namespace Ahmed.C42.PL
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Account/SignIn";
-                options.LogoutPath = "/Account/SignIn";
+                //options.LogoutPath = "/Account/SignIn";
+                
                 options.AccessDeniedPath = "/Home/Error";
                 options.ExpireTimeSpan = TimeSpan.FromDays(5);
             });
