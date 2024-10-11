@@ -8,6 +8,8 @@ namespace Ahmed.C42.PL.Controllers
 {
 	public class AccountController : Controller
 	{
+		#region Services
+
 		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly SignInManager<ApplicationUser> _signInManager;
 
@@ -18,7 +20,12 @@ namespace Ahmed.C42.PL.Controllers
 		{
 			_userManager = userManager;
 			_signInManager = signInManager;
-		}
+		} 
+
+		#endregion
+
+		#region SignUp
+
 		[HttpGet]
 		public IActionResult SignUp()
 		{
@@ -60,5 +67,51 @@ namespace Ahmed.C42.PL.Controllers
 
 			return View(signUpViewModel);
 		}
+
+		#endregion
+
+		#region SignIn
+
+		[HttpGet]
+		public IActionResult SignIn()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> SignIn(SignInViewModel signInViewModel)
+		{
+			if (!ModelState.IsValid)
+				return BadRequest();
+
+			var user = await _userManager.FindByEmailAsync(signInViewModel.Email);
+			
+			if(user is not null)
+			{
+				var checkPass = await _userManager.CheckPasswordAsync(user,signInViewModel.Password);
+				if (checkPass)
+				{
+					var result = await _signInManager.PasswordSignInAsync(user, signInViewModel.Password, signInViewModel.RememberMe, true);
+
+					if (result.IsNotAllowed)
+						ModelState.AddModelError(string.Empty, "Your account is not Confirmed yet!!");
+
+					if (result.IsLockedOut)
+						ModelState.AddModelError(string.Empty, "Youe Account is Locked!!");
+
+					///if (result.RequiresTwoFactor)
+					///{
+					///}
+
+					if(result.Succeeded)
+						return RedirectToAction(nameof(HomeController.Index) ,"Home");
+				}
+			}
+
+			ModelState.AddModelError(string.Empty, " Invalid Login Attempt.");
+			return View(signInViewModel);
+
+		}
+		#endregion
 	}
 }

@@ -2,6 +2,7 @@
 using Ahmed.C42.BLL.Services.Departments;
 using Ahmed.C42.PL.ViewModels.Departments;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 
 //using Ahmed.C42.DAL.Presistence.Repositories.Departments;
@@ -13,8 +14,9 @@ using System.Threading.Tasks;
 
 namespace Ahmed.C42.PL.Controllers
 {   //Inheritance: DepartmentController is a Controller
-    //Composition: DepartmentController has IDepartmentService  (if IDepartmentService? will agrigation)
-    public class DepartmentController : Controller
+	//Composition: DepartmentController has IDepartmentService  (if IDepartmentService? will agrigation)
+	[Authorize]
+	public class DepartmentController : Controller
     {
         #region Serviecs
 

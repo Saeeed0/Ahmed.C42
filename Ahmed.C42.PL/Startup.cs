@@ -112,6 +112,34 @@ namespace Ahmed.C42.PL
 				option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(50);
 			})
 				.AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/SignIn";
+                options.LogoutPath = "/Account/SignIn";
+                options.AccessDeniedPath = "/Home/Error";
+                options.ExpireTimeSpan = TimeSpan.FromDays(5);
+            });
+
+            //services.AddAuthentication();
+
+            //services.AddAuthentication("Aplication.Identity");
+
+            /*services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "Aplication.Identity";
+                options.DefaultChallengeScheme = "Hamada";
+
+            }).AddCookie("Hamada", displayName: "Asp.Hamada", options =>
+			{
+				options.LoginPath = "/Account/LogIn";
+				options.LogoutPath = "/Account/LogIn";
+				options.AccessDeniedPath = "/Home/Error";
+				options.ExpireTimeSpan = TimeSpan.FromDays(10);
+			});*/
+
+
+
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -132,7 +160,8 @@ namespace Ahmed.C42.PL
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication(); ///ensure that the user has token
+            app.UseAuthorization(); /// ensure that the user has role to the action that he intended do 
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,4 +1,5 @@
 ﻿using Ahmed.C42.PL.ViewModels.Commen;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Ahmed.C42.PL.Controllers
 {
+    [Authorize/*(AuthenticationSchemes ="Hamada")*/]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
